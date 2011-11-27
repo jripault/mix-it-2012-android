@@ -1,0 +1,58 @@
+<!--
+  Copyright 2011 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/menu_refresh"
+        android:icon="@drawable/ic_action_refresh"
+        android:orderInCategory="0"
+        android:showAsAction="always"
+        android:title="@string/menu_refresh"/>
+    <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_action_search"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/menu_search"/>
+    <item
+        android:id="@+id/menu_user"
+        android:icon="@drawable/ic_menu_profile"
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:title="@string/menu_user"/>
+    <item
+        android:id="@+id/menu_sponsor"
+        android:orderInCategory="3"
+        android:showAsAction="never"
+        android:title="@string/menu_sponsor"/>
+    <item
+        android:id="@+id/menu_participants"
+        android:icon="@drawable/ic_menu_participants"
+        android:orderInCategory="4"
+        android:showAsAction="never"
+        android:title="@string/menu_participants"/>
+    <item
+        android:id="@+id/menu_about"
+        android:icon="@drawable/ic_menu_info_details"
+        android:orderInCategory="5"
+        android:showAsAction="never"
+        android:title="@string/menu_about"/>
+    <item
+        android:id="@+id/menu_settings"
+        android:icon="@drawable/ic_menu_preferences"
+        android:orderInCategory="6"
+        android:showAsAction="never"
+        android:title="@string/menu_settings"/>
+</menu>

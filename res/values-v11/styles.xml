@@ -16,7 +16,7 @@
 
 <resources>
 
-    <style name="AppTheme" parent="android:style/Theme.Holo.Light">
+    <style name="Theme.IOSched" parent="android:style/Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/ActionBar</item>
         <item name="android:windowContentOverlay">@drawable/actionbar_shadow</item>
     </style>

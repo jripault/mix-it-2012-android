@@ -16,10 +16,12 @@
 
 package fr.mixit.android.util;
 
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-
-import fr.mixit.android.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -37,10 +39,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import fr.mixit.android.R;
 
 /**
  * A class that implements the action bar pattern for pre-Honeycomb devices.
@@ -65,8 +64,7 @@ public class ActivityHelperBase extends ActivityHelper {
     /**{@inheritDoc}*/
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
-        mActivity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
-                R.layout.actionbar_compat);
+        mActivity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.actionbar_compat);
         setupActionBar();
 
         SimpleMenu menu = new SimpleMenu(mActivity);
@@ -89,14 +87,12 @@ public class ActivityHelperBase extends ActivityHelper {
             return;
         }
 
-        LinearLayout.LayoutParams springLayoutParams = new LinearLayout.LayoutParams(
-                0, ViewGroup.LayoutParams.FILL_PARENT);
+        LinearLayout.LayoutParams springLayoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.FILL_PARENT);
         springLayoutParams.weight = 1;
 
         // Add Home button
         SimpleMenu tempMenu = new SimpleMenu(mActivity);
-        SimpleMenuItem homeItem = new SimpleMenuItem(
-                tempMenu, android.R.id.home, 0, mActivity.getString(R.string.app_name));
+        SimpleMenuItem homeItem = new SimpleMenuItem(tempMenu, android.R.id.home, 0, mActivity.getString(R.string.app_name));
         homeItem.setIcon(R.drawable.ic_home);
         addActionItemCompatFromMenuItem(homeItem);
 
@@ -111,8 +107,7 @@ public class ActivityHelperBase extends ActivityHelper {
     @Override
     public void setRefreshActionItemState(boolean refreshing) {
         View refreshButton = mActivity.findViewById(R.id.actionbar_compat_item_refresh);
-        View refreshIndicator = mActivity.findViewById(
-                R.id.actionbar_compat_item_refresh_progress);
+        View refreshIndicator = mActivity.findViewById(R.id.actionbar_compat_item_refresh_progress);
 
         if (refreshButton != null) {
             refreshButton.setVisibility(refreshing ? View.GONE : View.VISIBLE);
@@ -138,7 +133,7 @@ public class ActivityHelperBase extends ActivityHelper {
 
     /**{@inheritDoc}*/
     @Override
-	public void onTitleChanged(CharSequence title, int color) {
+    public void onTitleChanged(CharSequence title, int color) {
         TextView titleView = (TextView) mActivity.findViewById(R.id.actionbar_compat_title);
         if (titleView != null) {
             titleView.setText(title);

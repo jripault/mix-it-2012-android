@@ -24,19 +24,16 @@ import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import fr.mixit.android.util.ActivityHelper;
 
 /**
- * A base activity that defers common functionality across app activities to an {@link
- * ActionBarHelper}.
+ * A base activity that defers common functionality across app activities to an {@link ActionBarHelper}.
  *
  * NOTE: dynamically marking menu items as invisible/visible is not currently supported.
- *
- * NOTE: this may used with the Android Compatibility Package by extending
- * android.support.v4.app.FragmentActivity instead of {@link Activity}.
  */
 public abstract class BaseActivity extends FragmentActivity {
-    final ActivityHelper mActivityHelper = ActivityHelper.createInstance(this);
+	final ActivityHelper mActivityHelper = ActivityHelper.createInstance(this);
 
     /**
      * Returns the {@link ActionBarHelper} for this activity.
@@ -78,6 +75,13 @@ public abstract class BaseActivity extends FragmentActivity {
         return retValue;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+        	mActivityHelper.goHome();
+        }
+        return super.onOptionsItemSelected(item);
+    }
     /**{@inheritDoc}*/
     @Override
     protected void onTitleChanged(CharSequence title, int color) {

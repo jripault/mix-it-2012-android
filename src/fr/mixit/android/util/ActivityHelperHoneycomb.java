@@ -16,15 +16,13 @@
 
 package fr.mixit.android.util;
 
-import fr.mixit.android.R;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import fr.mixit.android.R;
 
 /**
  * An extension of {@link ActivityHelper} that provides Android 3.0-specific functionality for

@@ -32,6 +32,7 @@ import java.util.List;
  * {@link BaseActivity#openActivityOrFragment(android.content.Intent)}.
  */
 public abstract class BaseMultiPaneActivity extends BaseActivity {
+	
     /** {@inheritDoc} */
     @Override
     public void openActivityOrFragment(final Intent intent) {
@@ -87,7 +88,7 @@ public abstract class BaseMultiPaneActivity extends BaseActivity {
      * A class describing information for a fragment-substitution, used when a fragment can act
      * in place of an activity.
      */
-    protected class FragmentReplaceInfo {
+    public class FragmentReplaceInfo {
         private Class mFragmentClass;
         private String mFragmentTag;
         private int mContainerId;

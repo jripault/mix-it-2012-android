@@ -22,11 +22,6 @@
         android:drawableTop="@drawable/home_btn_schedule"
         android:text="@string/btn_schedule" />
     <Button
-        android:id="@+id/home_btn_stream"
-        style="@style/DashboardButton"
-        android:drawableTop="@drawable/home_btn_stream"
-        android:text="@string/btn_stream" />
-    <Button
         android:id="@+id/home_btn_sessions"
         style="@style/DashboardButton"
         android:drawableTop="@drawable/home_btn_sessions"

@@ -19,12 +19,14 @@
     android:layout_height="fill_parent"
     android:orientation="horizontal" >
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="fill_parent"
+        android:layout_weight="1"
         android:orientation="vertical" >
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:scaleType="center"
             android:src="@drawable/logo_home_rgb" />
         <fragment
@@ -41,10 +43,9 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="vertical" >
-        <!--
-            <LinearLayout
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -55,14 +56,13 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/body_padding_large"
-                android:text="@string/title_tagstream" />
+                android:text="@string/title_stream" />
             <fragment
-                android:id="@+id/fragment_tag_stream"
+                android:id="@+id/fragment_stream"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:name="fr.mixit.android.ui.TagStreamFragment" />
+                android:name="fr.mixit.android.ui.ActivityStreamFragment" />
         </LinearLayout>
-        -->
         <fragment
             android:id="@+id/fragment_whats_on"
             android:layout_width="fill_parent"
