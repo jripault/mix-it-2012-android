@@ -29,7 +29,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import fr.mixit.android.R;
 import fr.mixit.android.ui.tablet.NowPlayingMultiPaneActivity;
-import fr.mixit.android.util.UIUtils;
+import fr.mixit.android.utils.UIUtils;
 
 /**
  * A fragment used in {@link HomeActivity} that shows either a countdown, 'now playing' link to

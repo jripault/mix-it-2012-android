@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package fr.mixit.android.util;
+package fr.mixit.android.utils;
 
 import java.io.IOException;
 import java.util.HashSet;

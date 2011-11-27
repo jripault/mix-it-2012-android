@@ -14,6 +14,8 @@
     <!-- Titles -->
     <string name="title_stream">Activity Stream</string>
     <string name="title_now_playing">Now Playing</string>
+    <string name="title_new_sessions">New sessions</string>
+    <string name="title_changed_starred_sessions">Changed starred sessions</string>
     <!-- Dashboard -->
     <string name="btn_schedule">Schedule</string>
     <string name="btn_stream">Stream</string>
@@ -30,4 +32,11 @@
         <item quantity="one"><xliff:g id="number_of_days">%1$s</xliff:g> day, <xliff:g id="remaining_time">%2$s</xliff:g>\nuntil Mix-IT</item>
         <item quantity="other"><xliff:g id="number_of_days">%1$s</xliff:g> days, <xliff:g id="remaining_time">%2$s</xliff:g>\nuntil Mix-IT</item>
     </plurals>
+    <!-- Notifications -->
+    <string name="new_session">New Mix It session</string>
+    <string name="at_total"> in total.</string>
+    <string name="update_session">Changed Mix It session</string>
+    <string name="permission_write">Modify MixIt schedule data</string>
+    <!-- Updates -->
+    <string name="toast_sync_error">Sync error: %1$s</string>
 </resources>

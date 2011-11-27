@@ -25,7 +25,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import fr.mixit.android.util.ActivityHelper;
+import fr.mixit.android.utils.ActivityHelper;
 
 /**
  * A base activity that defers common functionality across app activities to an {@link ActionBarHelper}.

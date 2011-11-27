@@ -63,4 +63,9 @@ public class ActivityStreamFragment extends Fragment {
 		return root;
 	}
 
+	public void refresh() {
+		// TODO refresh user's stream on Link-it
+		
+	}
+
 }
