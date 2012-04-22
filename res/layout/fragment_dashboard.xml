@@ -1,0 +1,46 @@
+<fr.mixit.android.ui.widgets.DashboardLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <Button
+        android:id="@+id/home_btn_schedule"
+        style="@style/Widget.MixIt.DashboardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/home_btn_schedule"
+        android:text="@string/btn_schedule" />
+    <Button
+        android:id="@+id/home_btn_stream"
+        style="@style/Widget.MixIt.DashboardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/home_btn_stream"
+        android:text="@string/btn_stream" />
+    <Button
+        android:id="@+id/home_btn_sessions"
+        style="@style/Widget.MixIt.DashboardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/home_btn_sessions"
+        android:text="@string/btn_sessions" />
+    <Button
+        android:id="@+id/home_btn_members"
+        style="@style/Widget.MixIt.DashboardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/home_btn_members"
+        android:text="@string/btn_members" />
+    <Button
+        android:id="@+id/home_btn_starred"
+        style="@style/Widget.MixIt.DashboardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/home_btn_starred"
+        android:text="@string/btn_starred" />
+    <Button
+        android:id="@+id/home_btn_map"
+        style="@style/Widget.MixIt.DashboardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/home_btn_map"
+        android:text="@string/btn_map" />
+</fr.mixit.android.ui.widgets.DashboardLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:padding="5dp" >
+    <TextView
+        android:id="@+id/login_mixit_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dip"
+        android:maxWidth="300dp"
+        android:text="@string/login_mixit_title" />
+    <EditText
+        android:id="@+id/login_mixit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_mixit_title"
+        android:layout_marginBottom="5dip"
+        android:hint="@string/login_hint"
+        android:maxWidth="300dp" />
+    <EditText
+        android:id="@+id/pass_mixit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_mixit"
+        android:layout_marginBottom="15dip"
+        android:hint="@string/pass_hint"
+        android:inputType="textPassword"
+        android:maxWidth="300dp" />
+    <Button
+        android:id="@+id/login_bt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pass_mixit"
+        android:maxWidth="300dp"
+        android:text="@string/login_bt" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_bt"
+        android:maxWidth="300dp" >
+        <Button
+            android:id="@+id/login_google_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/login_google" />
+        <Button
+            android:id="@+id/login_twitter_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/login_twitter" />
+    </LinearLayout>
+</RelativeLayout>

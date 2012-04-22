@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget" />
+    <style name="Widget.MixIt" />
+    <style name="Widget.Styled.ActionBar" parent="Widget.Sherlock.ActionBar.Solid"> <!-- <item name="background">@drawable/bg_striped</item> -->
+        <!-- <item name="android:background">@drawable/bg_striped</item> -->
+        <!-- <item name="backgroundSplit">@drawable/bg_striped_split</item> -->
+        <!-- <item name="android:backgroundSplit">@drawable/bg_striped_split</item> -->
+    </style>
+    <style name="Widget.MixIt.TextView.Normal" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+    <style name="Widget.MixIt.DashboardButton">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/accent_1</item>
+        <item name="android:background">@null</item>
+    </style>
+    <style name="Widget.MixIt.ListItem">
+        <item name="android:minHeight">?android:attr/listPreferredItemHeight</item>
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingRight">10dip</item>
+        <item name="android:paddingTop">8dip</item>
+        <item name="android:paddingBottom">8dip</item>
+    </style>
+    <style name="Widget.MixIt.BulletCount">
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:paddingLeft">3dip</item>
+        <item name="android:paddingRight">3dip</item>
+        <item name="android:paddingTop">0dip</item>
+        <item name="android:paddingBottom">1dip</item>
+        <item name="android:minWidth">20dip</item>
+        <item name="android:maxWidth">48dip</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+    </style>
+    <style name="Widget.MixIt.SegmentationButton">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:minHeight">40dp</item>
+    </style>
+    <style name="Widget.MixIt.TextHeaderTwo">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/primary_text_light</item>
+    </style>
+    <style name="Widget.MixIt.Tab" parent="Widget.Sherlock.ActionBar.TabView">
+        <item name="android:background">@drawable/abs__tab_indicator_ab_holo</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minWidth">80dip</item>
+        <!-- <item name="android:layout_height">@dimen/abs__action_bar_default_height</item> -->
+        <item name="android:minHeight">@dimen/abs__action_bar_default_height</item>
+    </style>
+    <style name="Widget.MixIt.TabText" parent="Widget.Sherlock.ActionBar.TabText">
+        <item name="android:maxWidth">180dip</item>
+    </style>
+    <style name="ListItemTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/body_text_1</item>
+    </style>
+    <style name="ListItemSubtitle">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/body_text_2</item>
+    </style>
+    <style name="ListItemContainerBase">
+        <item name="android:minHeight">?android:attr/listPreferredItemHeight</item>
+    </style>
+    <!-- a simple list item is one whose container and content are the same view -->
+    <style name="SimpleListItem" parent="style/ListItemContainerBase">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+    <!-- used for more complex list items, e.g. those with stars aligned to the top-right -->
+    <style name="ListItemContainer" parent="style/ListItemContainerBase" />
+    <style name="ListItemContent">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+    <!-- About -->
+    <style name="AboutText">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+<!--         <item name="android:textSize">@dimen/text_size_about</item> -->
+        <item name="android:paddingBottom">10dip</item>
+        <!-- <item name="android:textStyle">normal</item> -->
+        <!-- <item name="android:textColor">@color/title_text_alt</item> -->
+    </style>
+</resources>

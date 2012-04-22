@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Generic -->
+    <string name="app_name">Mix-IT</string>
+    <string name="permission_write">Modifier les données de Mix-IT</string>
+    <string name="functionnality_need_connectivity">Cette fonctionnalité nécessite une connectivité</string>
+    <!-- Errors -->
+    <string name="error_initialization_application">Une erreur est survenue lors de l\'initialisation de l\'application</string>
+    <string name="error_no_connectivity">Pas de connectivité Internet</string>
+    <!-- Splashscreen -->
+    <string name="progress_text">Initialisation de l\'application</string>
+    <!-- Home -->
+    <string name="action_bar_account">Mon Compte</string>
+    <!-- Dashboard -->
+    <string name="btn_schedule">Agenda</string>
+    <string name="btn_stream">Activités</string>
+    <string name="btn_sessions">Sessions</string>
+    <string name="btn_members">Membres</string>
+    <string name="btn_starred">Favoris</string>
+    <string name="btn_map">Carte</string>
+    <!-- Sessions -->
+    <string name="empty_sessions">Pas de sessions trouvées</string>
+    <string name="session_details">Détail d\'une sessions</string>
+    <string name="all_sessions">Sessions</string>
+    <string name="all_lightning_talks">Lightning Talks</string>
+    <string name="track_agility">Agility</string>
+    <string name="track_techy">Techy</string>
+    <string name="track_trendy">Trendy</string>
+    <string name="track_gamy">Gamy</string>
+    <string name="track_weby">Weby</string>
+    <string name="session_summary_speakers">Speakers :</string>
+    <string name="session_summary">Description</string>
+    <string name="session_comments">Commentaires</string>
+    <string name="session_in_parallel">En parallèle</string>
+    <string name="session_activities">Activités</string>
+    <string name="session_interests">Intérêts</string>
+    <string name="no_session_summary">Pas de description pour cette Sessions</string>
+    <string name="no_session_speakers">Pas de speaker pour cette Session</string>
+    <string name="action_bar_share_with">Partager avec...</string>
+    <string name="share_session_subject">Découvrez cette sessions à Mix-IT</string>
+    <string name="share_session_text">Découvrez cette sessions \"%1$s\" à Mix-IT : %1$s</string>
+    <string name="action_bar_vote_add">+1</string>
+    <string name="action_bar_vote_delete">-1</string>
+    <string name="action_bar_favorite_add">Ajouter aux favoris</string>
+    <string name="action_bar_favorite_delete">Retirer des favoris</string>
+    <string name="error_vote_lightning_talk">Une erreur est survenue pendant l\'envoi de votre vote</string>
+    <string name="error_star_session">Une erreur est survenue lors de l\'enregistrement de favoris</string>
+    <string name="no_session">Pas de session selecitonnée</string>
+    <!-- Members -->
+    <string name="empty_members">Pas de membre trouvé</string>
+    <string name="member_details">Details d\'un membre</string>
+    <string name="all_members">Membres</string>
+    <string name="all_speakers">Speakers</string>
+    <string name="member_desc">Bio</string>
+    <string name="member_links">Links</string>
+    <string name="member_linkers">Linkers</string>
+    <string name="member_sessions">Mes Sessions</string>
+    <string name="member_lightnings">Mes Lightning\nTalks</string>
+    <string name="member_starred_sessions">Sessions\nFavorites</string>
+    <string name="member_interests">Mes Intérêts</string>
+    <string name="member_shared_links">Mes Liens</string>
+    <string name="no_member_bio">Pas de bio pour ce membre</string>
+    <string name="nb_consult">%d vue(s)</string>
+    <string name="no_member">Pas de membre selectionné</string>
+    <string name="desc_member_image">Image du membre</string>
+    <!-- Interests -->
+    <string name="interest_details">Details d\'un intérêt</string>
+    <!-- Login -->
+    <string name="login">Connexion</string>
+    <string name="login_mixit_title">Connexion avec votre compte Mix-IT</string>
+    <string name="login_hint">Connexion</string>
+    <string name="pass_hint">Mot de passe</string>
+    <string name="login_bt">Connexion</string>
+    <string name="login_google">Connexion avec Google</string>
+    <string name="login_twitter">Connexion avec Twitter</string>
+    <string name="select_android_account_title">Selectionnez un compte pour vous connecter à Mix-IT</string>
+    <string name="other_account">Connexion avec un autre compte</string>
+    <string name="android_accounts_error_ws">Une erreur est survenue lors de la connexion à Mix-IT avec votre compte %1$s</string>
+    <string name="android_accounts_login_successful">Connexion à Mix-IT avec votre compte %1$s : %2$s</string>
+    <string name="login_oauth_failed">Une erreur est survenue lors de la connection avec votre compte %1$s</string>
+    <string name="error_login">Une erreur est survenue lors de la connexion à votre compte Mix-IT</string>
+    <string name="login_successful">Connexion avec votre compte Mix-IT</string>
+    <!-- Map -->
+    <string name="map_title">Comment accéder au site?</string>
+    <string name="access_title">Lieu :</string>
+    <string name="access_content">SUPINFO LYON\n
+Les Jardins d\'Osaka\n
+16 Rue Jean Desparmet\n
+69008 LYON\n
+Nous vous convions à privilégier les transports en commun, les vélos ou la marche pour venir à la conférence. C\'est plus écologique et sachez aussi que les places de parking aux alentours de SUPINFO ne sont pas nombreuses!</string>
+    <string name="mixit_map_url">http://www.mix-it.fr/infos/acces</string>
+    <!-- About -->
+    <string name="action_bar_about">A propos</string>
+    <string name="about_text1">Le code source a été créé pour la conférence MixIt par :</string>
+    <string name="about_text2">Mathieu Calba\nmathieu.calba@gmail.com</string>
+    <string name="about_text3">Le Code source est disponible à https://github.com/jripault/mix-it-2012-android</string>
+    <string name="about_text4">Version %s</string>
+</resources>

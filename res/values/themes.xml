@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- General Theme -->
+    <style name="Theme.MixIt" parent="Theme.Sherlock.Light.DarkActionBar">
+        <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
+        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
+        <!-- <item name="android:progressBarStyle">@style/Widget.Sherlock.ProgressBar</item> -->
+    </style>
+    <!-- Splashscreen without the action bar -->
+    <style name="Theme.MixIt.Splashscreen" parent="Theme.Sherlock.NoActionBar">
+        <item name="android:textViewStyle">@style/Widget.MixIt.TextView.Normal</item>
+    </style>
+</resources>

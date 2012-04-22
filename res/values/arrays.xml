@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="members">
+        <item>@string/all_members</item>
+        <item>@string/all_speakers</item>
+    </string-array>
+    <string-array name="sessions">
+        <item>@string/all_sessions</item>
+        <item>@string/all_lightning_talks</item>
+    </string-array>
+</resources>

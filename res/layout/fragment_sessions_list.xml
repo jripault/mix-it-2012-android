@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/tracks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal" >
+        <ToggleButton
+            android:id="@+id/track_agility"
+            style="@style/Widget.MixIt.SegmentationButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-1dp"
+            android:layout_weight="1"
+            android:background="@drawable/bt_track_agility"
+            android:textOff="@string/track_agility"
+            android:textOn="@string/track_agility" />
+        <ToggleButton
+            android:id="@+id/track_techy"
+            style="@style/Widget.MixIt.SegmentationButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-1dp"
+            android:layout_weight="1"
+            android:background="@drawable/bt_track_techy"
+            android:textOff="@string/track_techy"
+            android:textOn="@string/track_techy" />
+        <ToggleButton
+            android:id="@+id/track_trendy"
+            style="@style/Widget.MixIt.SegmentationButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-1dp"
+            android:layout_weight="1"
+            android:background="@drawable/bt_track_trendy"
+            android:textOff="@string/track_trendy"
+            android:textOn="@string/track_trendy" />
+        <ToggleButton
+            android:id="@+id/track_gamy"
+            style="@style/Widget.MixIt.SegmentationButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-1dp"
+            android:layout_weight="1"
+            android:background="@drawable/bt_track_gamy"
+            android:textOff="@string/track_gamy"
+            android:textOn="@string/track_gamy" />
+        <ToggleButton
+            android:id="@+id/track_weby"
+            style="@style/Widget.MixIt.SegmentationButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bt_track_weby"
+            android:textOff="@string/track_weby"
+            android:textOn="@string/track_weby" />
+    </LinearLayout>
+    <include layout="@android:layout/list_content" />
+</LinearLayout>

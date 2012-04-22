@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ListItemContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <View
+        android:id="@+id/session_track"
+        android:layout_width="6dip"
+        android:layout_height="match_parent" />
+    <RelativeLayout
+        android:id="@+id/list_item_session"
+        style="@style/ListItemContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+        <TextView
+            android:id="@+id/session_title"
+            style="@style/ListItemTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true" />
+        <TextView
+            android:id="@+id/session_subtitle"
+            style="@style/ListItemSubtitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/session_title" />
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/star_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_starred" />
+</LinearLayout>

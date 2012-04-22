@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/member_animator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:inAnimation="@android:anim/fade_in"
+    android:outAnimation="@android:anim/fade_out" >
+    <TextView
+        android:id="@+id/member_no_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/no_member" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <ImageView
+                android:id="@+id/member_image"
+                android:layout_width="@dimen/member_image_width_big"
+                android:layout_height="@dimen/member_image_height_big"
+                android:layout_margin="@dimen/member_image_padding"
+                android:contentDescription="@string/desc_member_image"
+                android:scaleType="fitCenter" />
+            <TextView
+                android:id="@+id/member_nb_consult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/member_image"
+                android:layout_alignRight="@id/member_image"
+                android:layout_below="@id/member_image" />
+            <TextView
+                android:id="@+id/member_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/member_image" />
+            <TextView
+                android:id="@+id/member_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/member_name"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/member_name" />
+            <TextView
+                android:id="@+id/member_short_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/member_name"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/member_company" />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/member_shared_links"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TabHost
+            android:id="@android:id/tabhost"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+                <HorizontalScrollView
+                    android:id="@+id/horizontal_tab_widget"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:fillViewport="true"
+                    android:scrollbars="none" >
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bkg_tabs"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="0" />
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </TabHost>
+    </LinearLayout>
+</ViewAnimator>

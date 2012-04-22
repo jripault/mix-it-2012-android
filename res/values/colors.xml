@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="accent_1">#FF29549F</color>
+    <color name="foreground1">#FFFF9600</color>
+    <color name="body_text_1">#FF000000</color>
+    <color name="body_text_2">#99000000</color>
+    <color name="agility">#FFE8ADAA</color>
+    <color name="gamy">#FFA0D5E5</color>
+    <color name="techy">#FF9ACBFF</color>
+    <color name="trendy">#FFACE0AC</color>
+    <color name="weby">#FF9DF8FC</color>
+    <color name="agility_light">#7FE8ADAA</color>
+    <color name="gamy_light">#7FA0D5E5</color>
+    <color name="techy_light">#7F9ACBFF</color>
+    <color name="trendy_light">#7FACE0AC</color>
+    <color name="weby_light">#7F9DF8FC</color>
+    <color name="border_bt_track">#CCC</color>
+    <color name="star_color">#FFFFD700</color>
+    <color name="background">#EEE</color>
+    <color name="blue_mixit">#FF0064CD</color>
+</resources>

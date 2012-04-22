@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/menu_item_account"
+        android:icon="@drawable/ic_account"
+        android:showAsAction="always"
+        android:title="@string/action_bar_account"/>
+    <item
+        android:id="@+id/menu_item_about"
+        android:icon="@drawable/ic_about"
+        android:showAsAction="always"
+        android:title="@string/action_bar_about"/>
+</menu>
