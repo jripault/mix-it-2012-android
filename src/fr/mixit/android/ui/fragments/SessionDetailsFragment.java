@@ -259,8 +259,10 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 		if (!mIsSession) {
 			if (mIsVoted) {
 				actionItem.setTitle(R.string.action_bar_vote_delete);
+				actionItem.setIcon(R.drawable.ic_vote_down);
 			} else {
 				actionItem.setTitle(R.string.action_bar_vote_add);
+				actionItem.setIcon(R.drawable.ic_vote_up);
 			}
 		} else {
 			if (mIsVoted) {
