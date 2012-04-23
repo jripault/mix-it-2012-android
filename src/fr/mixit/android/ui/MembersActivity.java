@@ -12,9 +12,11 @@ import android.widget.ArrayAdapter;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
+import com.actionbarsherlock.view.Window;
 
 import fr.mixit.android.R;
 import fr.mixit.android.provider.MixItContract;
+import fr.mixit.android.ui.fragments.BoundServiceContract;
 import fr.mixit.android.ui.fragments.MemberDetailsFragment;
 import fr.mixit.android.ui.fragments.MembersListFragment;
 import fr.mixit.android.ui.fragments.SessionDetailsFragment;
@@ -22,7 +24,7 @@ import fr.mixit.android.ui.fragments.SessionDetailsFragment.SessionDetailsContra
 import fr.mixit.android.utils.IntentUtils;
 import fr.mixit.android.utils.UIUtils;
 
-public class MembersActivity extends GenericMixItActivity implements OnNavigationListener/*, MemberDetailsContract */, SessionDetailsContract {
+public class MembersActivity extends GenericMixItActivity implements OnNavigationListener/*, MemberDetailsContract */, SessionDetailsContract, BoundServiceContract {
 
 	public static final int DISPLAY_MODE_ALL_MEMBERS = 1204101929;
 	public static final int DISPLAY_MODE_SPEAKERS = 1204101930;
@@ -40,6 +42,8 @@ public class MembersActivity extends GenericMixItActivity implements OnNavigatio
 
 	@Override
 	protected void onCreate(Bundle savedStateInstance) {
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
 		super.onCreate(savedStateInstance);
 
 		Context context = getSupportActionBar().getThemedContext();
@@ -187,6 +191,11 @@ public class MembersActivity extends GenericMixItActivity implements OnNavigatio
 	@Override
 	public void refreshList() {
 		// Nothing to do because we don't display the list of sessions
+	}
+
+	@Override
+	public void setRefreshMode(boolean state) {
+        setSupportProgressBarIndeterminateVisibility(state);
 	}
 
 }

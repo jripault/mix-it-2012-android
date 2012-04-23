@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.RemoteException;
 import android.provider.BaseColumns;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -21,22 +23,20 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.nostra13.universalimageloader.core.DecodingType;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoadingListener;
 import com.petebevin.markdown.MarkdownProcessor;
 
 import fr.mixit.android.R;
 import fr.mixit.android.provider.MixItContract;
+import fr.mixit.android.services.MixItService;
 import fr.mixit.android.ui.InterestsActivity;
 import fr.mixit.android.ui.adapters.InterestsAdapter;
 import fr.mixit.android.ui.adapters.MembersAdapter;
+import fr.mixit.android.ui.adapters.MembersAdapter.MembersQuery;
 import fr.mixit.android.ui.adapters.SessionsAdapter;
 import fr.mixit.android.ui.adapters.SharedLinksAdapter;
 import fr.mixit.android.ui.adapters.TabsAdapter;
-import fr.mixit.android.ui.adapters.MembersAdapter.MembersQuery;
 import fr.mixit.android.ui.controller.TabContainer;
 import fr.mixit.android.ui.controller.TabInterests;
 import fr.mixit.android.ui.controller.TabInterests.InterestsListener;
@@ -50,7 +50,7 @@ import fr.mixit.android.ui.controller.TabSharedLinks.SharedLinksListener;
 import fr.mixit.android.utils.IntentUtils;
 import fr.mixit.android.utils.UIUtils;
 
-public class MemberDetailsFragment extends SherlockFragment implements LoaderManager.LoaderCallbacks<Cursor>, MembersListener, SessionsListener,
+public class MemberDetailsFragment extends BoundServiceFragment implements LoaderManager.LoaderCallbacks<Cursor>, MembersListener, SessionsListener,
 		InterestsListener, SharedLinksListener {
 
 	public static final String TAG = MemberDetailsFragment.class.getSimpleName();
@@ -93,6 +93,7 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 	DisplayImageOptions mOptions;
 	
 	ImageLoader mImageLoader = ImageLoader.getInstance();
+	boolean mIsFirstLoad = true;
 
 	// public interface MemberDetailsContract {
 	// public void onLinkOrLinkerItemClick(int memberId);
@@ -282,6 +283,10 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 		int id = loader.getId();
 		if (id == CURSOR_MEMBER) {
 			displayMember(data);
+			
+			if (mIsFirstLoad) {
+				refreshMemberData();
+			}
 		} else if (id == CURSOR_LINKS) {
 			displayLinks(data);
 		} else if (id == CURSOR_LINKERS) {
@@ -320,11 +325,12 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 	public void setMemberId(int memberId) {
 		if (mMemberId != memberId) {
 			mMemberId = memberId;
+			
+			mIsFirstLoad = true;
 
 			Bundle b = getArguments();
 			b.putInt(EXTRA_MEMBER_ID, memberId);
 
-//			clear();
 			reload();
 		}
 	}
@@ -353,6 +359,9 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 				return;
 			}
 		}
+		if (getActivity() == null || isDetached()) {
+			return;
+		}
 		LoaderManager lm = getLoaderManager();
 		lm.restartLoader(CURSOR_MEMBER, args, this);
 		lm.restartLoader(CURSOR_LINKS, args, this);
@@ -372,13 +381,6 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 		displayLightnings(null);
 		displayInterests(null);
 		displaySharedLinks(null);
-//		
-//		clearTabs();
-	}
-	
-	void clearTabs() {
-//		mTabsAdapter.clearTabs();
-//		idTab++;
 	}
 	
 	void displayNoMemberSelected() {
@@ -388,10 +390,6 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 	}
 
 	void displayMember(Cursor c) {
-//		TabContainer tabContainer = new TabMemberBio(getActivity(), mViewPager);
-//		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_MEMBER + idTab).setIndicator(getString(R.string.member_desc)), tabContainer);
-//		mTabHost.setCurrentTab(0);
-
 		String name = null;
 		String company = null;
 		Spanned shortDesc = null;
@@ -401,7 +399,6 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 			if (mViewAnimator.getDisplayedChild() == 0) {
 				mViewAnimator.showNext();
 			}
-			// TODO : maybe harmonize syntax on name
 			StringBuilder nameStr = new StringBuilder();
 			String firstName = c.getString(MemberQuery.FIRSTNAME);
 			if (!TextUtils.isEmpty(firstName)) {
@@ -445,16 +442,6 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 	}
 
 	void displayLinks(Cursor c) {
-//		if (c != null && c.moveToFirst()) {
-//			int position = mTabsAdapter.getPosition(TAB_LINKS);
-//			if (position != -1) {
-//				mTabHost.getTabWidget().getChildAt(position).setVisibility(View.VISIBLE);
-//			}
-//		}
-//		if (c != null && c.moveToFirst()){ 
-//		TabContainer tabContainer = new TabMembers(getActivity(), mViewPager, this);
-//		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_LINKS + idTab).setIndicator(getString(R.string.member_links)), tabContainer);
-		
 		try {
 			TabMembers tabContainer = (TabMembers) mTabsAdapter.getTabContainer(TAB_LINKS);
 			if (tabContainer != null) {
@@ -465,20 +452,9 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 		} catch (ClassCastException e) {
 			Log.e(TAG, "The TabContainer requested with tag TAB_LINKS is not a TabMembers object", e);
 		}
-//		}
 	}
 
 	void displayLinkers(Cursor c) {
-//		if (c != null && c.moveToFirst()) {
-//			int position = mTabsAdapter.getPosition(TAB_LINKERS);
-//			if (position != -1) {
-//				mTabHost.getTabWidget().getChildAt(position).setVisibility(View.VISIBLE);
-//			}
-//		}
-//		if (c != null && c.moveToFirst()) {
-//		TabContainer tabContainer = new TabMembers(getActivity(), mViewPager, this);
-//		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_LINKERS + idTab).setIndicator(getString(R.string.member_linkers)), tabContainer);
-
 		try {
 			TabMembers tabContainer = (TabMembers) mTabsAdapter.getTabContainer(TAB_LINKERS);
 			if (tabContainer != null) {
@@ -489,20 +465,9 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 		} catch (ClassCastException e) {
 			Log.e(TAG, "The TabContainer requested with tag TAB_LINKERS is not a TabMembers object", e);
 		}
-//		}
 	}
 
 	void displaySessions(Cursor c) {
-//		if (c != null && c.moveToFirst()) {
-//			int position = mTabsAdapter.getPosition(TAB_SESSIONS);
-//			if (position != -1) {
-//				mTabHost.getTabWidget().getChildAt(position).setVisibility(View.VISIBLE);
-//			}
-//		}
-//		if (c != null && c.moveToFirst()) {
-//		TabContainer tabContainer = new TabSessions(getActivity(), mViewPager, this);
-//		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_SESSIONS + idTab).setIndicator(getString(R.string.member_sessions)), tabContainer);
-		
 		try {
 			TabSessions tabContainer = (TabSessions) mTabsAdapter.getTabContainer(TAB_SESSIONS);
 			if (tabContainer != null) {
@@ -513,20 +478,9 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 		} catch (ClassCastException e) {
 			Log.e(TAG, "The TabContainer requested with tag TAB_SESSIONS is not a TabSessions object", e);
 		}
-//		}
 	}
 
 	void displayLightnings(Cursor c) {
-//		if (c != null && c.moveToFirst()) {
-//			int position = mTabsAdapter.getPosition(TAB_LIGHTNINGS);
-//			if (position != -1) {
-//				mTabHost.getTabWidget().getChildAt(position).setVisibility(View.VISIBLE);
-//			}
-//		}
-//		if (c != null && c.moveToFirst()) {
-//		TabContainer tabContainer = new TabSessions(getActivity(), mViewPager, this);
-//		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_LIGHTNINGS + idTab).setIndicator(getString(R.string.member_lightnings)), tabContainer);
-		
 		try {
 			TabSessions tabContainer = (TabSessions) mTabsAdapter.getTabContainer(TAB_LIGHTNINGS);
 			if (tabContainer != null) {
@@ -537,20 +491,9 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 		} catch (ClassCastException e) {
 			Log.e(TAG, "The TabContainer requested with tag TAB_LIGHTNINGS is not a TabSessions object", e);
 		}
-//		}
 	}
 
 	void displayInterests(Cursor c) {
-//		if (c != null && c.moveToFirst()) {
-//			int position = mTabsAdapter.getPosition(TAB_INTERESTS);
-//			if (position != -1) {
-//				mTabHost.getTabWidget().getChildAt(position).setVisibility(View.VISIBLE);
-//			}
-//		}
-//		if (c != null && c.moveToFirst()) {
-//		TabContainer tabContainer = new TabInterests(getActivity(), mViewPager, this);
-//		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_INTERESTS + idTab).setIndicator(getString(R.string.member_interests)), tabContainer);
-		
 		try {
 			TabInterests tabContainer = (TabInterests) mTabsAdapter.getTabContainer(TAB_INTERESTS);
 			if (tabContainer != null) {
@@ -561,20 +504,9 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 		} catch (ClassCastException e) {
 			Log.e(TAG, "The TabContainer requested with tag TAB_INTERESTS is not a TabInterests object", e);
 		}
-//		}
 	}
 
 	void displaySharedLinks(Cursor c) {
-//		if (c != null && c.moveToFirst()) {
-//			int position = mTabsAdapter.getPosition(TAB_SHARED_LINKS);
-//			if (position != -1) {
-//				mTabHost.getTabWidget().getChildAt(position).setVisibility(View.VISIBLE);
-//			}
-//		}
-//		if (c != null && c.moveToFirst()) {
-//		TabContainer tabContainer = new TabSharedLinks(getActivity(), mViewPager, this);
-//		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_SHARED_LINKS + idTab).setIndicator(getString(R.string.member_shared_links)), tabContainer);
-		
 		try {
 			TabSharedLinks tabContainer = (TabSharedLinks) mTabsAdapter.getTabContainer(TAB_SHARED_LINKS);
 			if (tabContainer != null) {
@@ -585,7 +517,25 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 		} catch (ClassCastException e) {
 			Log.e(TAG, "The TabContainer requested with tag TAB_SHARED_LINKS is not a TabSharedLinks object", e);
 		}
-//		}
+	}
+	
+	void refreshMemberData() {
+		if (isBound && serviceReady) {
+            setRefreshMode(true);
+
+			Message msg = Message.obtain(null, MixItService.MSG_MEMBER, 0, 0);
+			msg.replyTo = messenger;
+			Bundle b = new Bundle();
+			b.putInt(MixItService.EXTRA_ID, mMemberId);
+			msg.setData(b);
+			try {
+				service.send(msg);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			
+			mIsFirstLoad = false;
+		}
 	}
 
 	public interface MemberQuery {
@@ -639,6 +589,28 @@ public class MemberDetailsFragment extends SherlockFragment implements LoaderMan
 		}
 		final Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		startActivity(browserIntent);
+	}
+
+	@Override
+	protected void onMessageReceivedFromService(Message msg) {
+		if (msg.what == MixItService.MSG_MEMBER) {
+            setRefreshMode(false);
+            
+			switch (msg.arg1) {
+			case MixItService.Response.STATUS_OK:
+				reload();
+				break;
+
+			case MixItService.Response.STATUS_ERROR:
+				break;
+
+			case MixItService.Response.STATUS_NO_CONNECTIVITY:
+				break;
+
+			default:
+				break;
+			}
+		}
 	}
 	
 }

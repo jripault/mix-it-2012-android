@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.RemoteException;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -14,17 +16,15 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ToggleButton;
-
-import com.actionbarsherlock.app.SherlockListFragment;
-
 import fr.mixit.android.R;
 import fr.mixit.android.model.Track;
 import fr.mixit.android.provider.MixItContract;
+import fr.mixit.android.services.MixItService;
 import fr.mixit.android.ui.SessionsActivity;
 import fr.mixit.android.ui.adapters.SessionsAdapter;
 import fr.mixit.android.utils.UIUtils;
 
-public class SessionsListFragment extends SherlockListFragment implements LoaderManager.LoaderCallbacks<Cursor>, OnClickListener {
+public class SessionsListFragment extends BoundServiceListFragment implements LoaderManager.LoaderCallbacks<Cursor>, OnClickListener {
 
 	public static final String TAG = SessionsListFragment.class.getSimpleName();
 
@@ -42,6 +42,7 @@ public class SessionsListFragment extends SherlockListFragment implements Loader
 	private int mCheckedPosition = -1;
 	// private boolean mHasSetEmptyText = false;
 	private int mode = SessionsActivity.DISPLAY_MODE_SESSIONS;
+	boolean mIsFirstLoad = true;
 
 	public static SessionsListFragment newInstance(Intent intent) {
 		SessionsListFragment f = new SessionsListFragment();
@@ -193,6 +194,10 @@ public class SessionsListFragment extends SherlockListFragment implements Loader
 			if (mCheckedPosition >= 0 && getView() != null) {
 				getListView().setItemChecked(mCheckedPosition, true);
 			}
+			
+			if (mIsFirstLoad) {
+				refreshSessionsData();
+			}
 		}
 	}
 
@@ -222,27 +227,73 @@ public class SessionsListFragment extends SherlockListFragment implements Loader
 	public void onClick(View v) {
 		int id = v.getId();
 		if (id == R.id.track_agility) {
-//			mTrackAgility.setChecked(!mTrackAgility.isChecked());
 			reload();
 		} else if (id == R.id.track_techy) {
-//			mTrackTechy.setChecked(!mTrackTechy.isChecked());
 			reload();
 		} else if (id == R.id.track_trendy) {
-//			mTrackTrendy.setChecked(!mTrackTrendy.isChecked());
 			reload();
 		} else if (id == R.id.track_gamy) {
-//			mTrackGamy.setChecked(!mTrackGamy.isChecked());
 			reload();
 		} else if (id == R.id.track_weby) {
-//			mTrackWeby.setChecked(!mTrackWeby.isChecked());
 			reload();
 		}
 	}
 
 	public void reload() {
+		if (getActivity() == null || isDetached()) {
+			return;
+		}
 		LoaderManager lm = getLoaderManager();
 		lm.destroyLoader(CURSOR_SESSIONS);
 		lm.restartLoader(CURSOR_SESSIONS, getArguments(), this);
+	}
+	
+	void refreshSessionsData() {
+		if (isBound && serviceReady) {
+			Message msg = null;
+			if (mode == SessionsActivity.DISPLAY_MODE_SESSIONS) {
+				msg = Message.obtain(null, MixItService.MSG_TALKS, 0, 0);
+			} else if (mode == SessionsActivity.DISPLAY_MODE_LIGHTNING_TALKS) {
+				msg = Message.obtain(null, MixItService.MSG_LIGHTNING_TALKS, 0, 0);
+			}
+			if (msg != null) {
+                setRefreshMode(true);
+
+				msg.replyTo = messenger;
+				Bundle b = new Bundle();
+				msg.setData(b);
+				try {
+					service.send(msg);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				
+				mIsFirstLoad = false;
+			} else {
+				setRefreshMode(false);
+			}
+		}
+	}
+
+	@Override
+	protected void onMessageReceivedFromService(Message msg) {
+		if (msg.what == MixItService.MSG_TALKS || msg.what == MixItService.MSG_LIGHTNING_TALKS) {
+            setRefreshMode(false);
+			switch (msg.arg1) {
+			case MixItService.Response.STATUS_OK:
+				reload();
+				break;
+
+			case MixItService.Response.STATUS_ERROR:
+				break;
+
+			case MixItService.Response.STATUS_NO_CONNECTIVITY:
+				break;
+
+			default:
+				break;
+			}
+		}
 	}
 
 	public void clearCheckedPosition() {
@@ -254,6 +305,8 @@ public class SessionsListFragment extends SherlockListFragment implements Loader
 
 	public void setDisplayMode(int displayMode) {
 		mode = displayMode;
+		
+		mIsFirstLoad = true;
 
 		if (mTracksLayout != null) {
 			if (mode == SessionsActivity.DISPLAY_MODE_SESSIONS) {

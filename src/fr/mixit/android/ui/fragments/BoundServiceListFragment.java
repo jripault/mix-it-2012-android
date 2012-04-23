@@ -12,15 +12,15 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.SherlockListFragment;
 
 import fr.mixit.android.MixItApplication;
 import fr.mixit.android.services.MixItService;
 
-public abstract class BoundServiceFragment extends SherlockFragment {
+public abstract class BoundServiceListFragment extends SherlockListFragment {
 
 	static final boolean DEBUG_MODE = MixItApplication.DEBUG_MODE;
-	static final String TAG = BoundServiceFragment.class.getSimpleName();
+	static final String TAG = BoundServiceListFragment.class.getSimpleName();
 
 	/** Flag indicating whether we have called bind on the service. */
 	boolean isBound = false;

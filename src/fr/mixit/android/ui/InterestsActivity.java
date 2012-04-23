@@ -12,9 +12,11 @@ import android.util.Log;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
+import com.actionbarsherlock.view.Window;
 
 import fr.mixit.android.R;
 import fr.mixit.android.provider.MixItContract;
+import fr.mixit.android.ui.fragments.BoundServiceContract;
 import fr.mixit.android.ui.fragments.MemberDetailsFragment;
 import fr.mixit.android.ui.fragments.MembersListFragment;
 import fr.mixit.android.ui.fragments.SessionDetailsFragment;
@@ -23,7 +25,7 @@ import fr.mixit.android.ui.fragments.SessionDetailsFragment.SessionDetailsContra
 import fr.mixit.android.utils.IntentUtils;
 import fr.mixit.android.utils.UIUtils;
 
-public class InterestsActivity extends GenericMixItActivity implements TabListener, SessionDetailsContract {
+public class InterestsActivity extends GenericMixItActivity implements TabListener, SessionDetailsContract, BoundServiceContract {
 
 	static final String TAG = InterestsActivity.class.getSimpleName();
 	
@@ -48,8 +50,10 @@ public class InterestsActivity extends GenericMixItActivity implements TabListen
 	
 	@Override
 	protected void onCreate(Bundle savedStateInstance) {
-		super.onCreate(savedStateInstance);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		
+		super.onCreate(savedStateInstance);
+
 		if (savedStateInstance != null) {
 			mSelectedTab = savedStateInstance.getInt(STATE_TAB_SELECTED, mSelectedTab);
 		}
@@ -277,6 +281,11 @@ public class InterestsActivity extends GenericMixItActivity implements TabListen
 			return new Intent(this, HomeActivity.class);
 		}
 		return null;
+	}
+
+	@Override
+	public void setRefreshMode(boolean state) {
+        setSupportProgressBarIndeterminateVisibility(state);
 	}
 
 }

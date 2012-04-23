@@ -1,23 +1,27 @@
 package fr.mixit.android.ui;
 
+import com.actionbarsherlock.view.Window;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import fr.mixit.android.R;
 import fr.mixit.android.model.OAuth;
+import fr.mixit.android.ui.fragments.BoundServiceContract;
 import fr.mixit.android.ui.fragments.LoginOAuthFragment;
 import fr.mixit.android.ui.fragments.LoginOAuthFragment.LoginOAuthContract;
 import fr.mixit.android.utils.IntentUtils;
 
-public class LoginOAuthActivity extends GenericMixItActivity implements LoginOAuthContract {
+public class LoginOAuthActivity extends GenericMixItActivity implements LoginOAuthContract, BoundServiceContract {
 	
 	LoginOAuthFragment mLoginFrag;
 	int mProvider;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
 		super.onCreate(bundle);
-		setContentView(R.layout.activity_login_oauth);
 
 		FragmentManager fm = getSupportFragmentManager();
 		mLoginFrag = (LoginOAuthFragment) fm.findFragmentByTag(LoginOAuthFragment.TAG);
@@ -26,6 +30,11 @@ public class LoginOAuthActivity extends GenericMixItActivity implements LoginOAu
 			fm.beginTransaction().add(R.id.activity_login_oauth, mLoginFrag).commit();
 		}
 		mProvider = getIntent().getIntExtra(IntentUtils.EXTRA_PROVIDER, OAuth.ACCOUNT_TYPE_NO);
+	}
+	
+	@Override
+	protected int getContentLayoutId() {
+		return R.layout.activity_login_oauth;
 	}
 
 	@Override
@@ -52,6 +61,11 @@ public class LoginOAuthActivity extends GenericMixItActivity implements LoginOAu
 
 	public Intent getGreatGrandParentIntent() {
 		return new Intent(this, AccountActivity.class);
+	}
+
+	@Override
+	public void setRefreshMode(boolean state) {
+        setSupportProgressBarIndeterminateVisibility(state);
 	}
 	
 }

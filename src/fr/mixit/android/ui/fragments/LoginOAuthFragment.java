@@ -110,6 +110,8 @@ public class LoginOAuthFragment extends BoundServiceFragment {
 		if (mProvider != OAuth.ACCOUNT_TYPE_NO) {
 			new OAuthInitTask(mProvider, this).execute();
 		}
+		
+		setRefreshMode(false);
 	}
 	
 	static OAuthService getOAuthService(int accountType) {

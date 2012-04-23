@@ -4,20 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+
+import com.actionbarsherlock.view.Window;
+
 import fr.mixit.android.R;
+import fr.mixit.android.ui.fragments.BoundServiceContract;
 import fr.mixit.android.ui.fragments.LoginAndroidAccountsListFragment;
-import fr.mixit.android.ui.fragments.LoginOAuthFragment;
 import fr.mixit.android.ui.fragments.LoginAndroidAccountsListFragment.LoginAndroidAccountsContract;
+import fr.mixit.android.ui.fragments.LoginOAuthFragment;
 import fr.mixit.android.utils.UIUtils;
 
-public class LoginAndroidAccountsListActivity extends GenericMixItActivity implements LoginAndroidAccountsContract {
+public class LoginAndroidAccountsListActivity extends GenericMixItActivity implements LoginAndroidAccountsContract, BoundServiceContract {
 	
 	LoginAndroidAccountsListFragment mLoginFrag;
 	
 	@Override
 	protected void onCreate(Bundle bundle) {
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
 		super.onCreate(bundle);
-		setContentView(R.layout.activity_login_android_accounts_list);
 
 		FragmentManager fm = getSupportFragmentManager();
 		mLoginFrag = (LoginAndroidAccountsListFragment) fm.findFragmentByTag(LoginAndroidAccountsListFragment.TAG);
@@ -25,6 +30,11 @@ public class LoginAndroidAccountsListActivity extends GenericMixItActivity imple
 			mLoginFrag = LoginAndroidAccountsListFragment.newInstance(getIntent());
 			fm.beginTransaction().add(R.id.activity_login_android_account, mLoginFrag, LoginAndroidAccountsListFragment.TAG).commit();
 		}
+	}
+	
+	@Override
+	protected int getContentLayoutId() {
+		return R.layout.activity_login_android_accounts_list;
 	}
 
 	@Override
@@ -58,6 +68,11 @@ public class LoginAndroidAccountsListActivity extends GenericMixItActivity imple
 
 	public Intent getGreatGrandParentIntent() {
 		return new Intent(this, HomeActivity.class);
+	}
+
+	@Override
+	public void setRefreshMode(boolean state) {
+        setSupportProgressBarIndeterminateVisibility(state);
 	}
 
 }

@@ -55,6 +55,13 @@ public class LoginMixItFragment extends BoundServiceFragment implements OnClickL
 		v.findViewById(R.id.login_twitter_bt).setOnClickListener(this);
 		return v;
 	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		
+		setRefreshMode(false);
+	}
 
 	@Override
 	public void onClick(View v) {

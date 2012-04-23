@@ -67,6 +67,7 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 	boolean mIsVoted = false;
 	boolean mIsSession = true;
 	String mTitleStr = null;
+	boolean mIsFirstLoad = true;
 
 	ViewAnimator mViewAnimator;
 	TextView mTitle;
@@ -212,6 +213,10 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 		int id = loader.getId();
 		if (id == CURSOR_SESSION) {
 			displaySession(data);
+			
+			if (mIsFirstLoad) {
+				refreshSessionData();
+			}
 		} else if (id == CURSOR_COMMENTS) {
 			displayComments(data);
 		} else if (id == CURSOR_SPEAKERS) {
@@ -234,15 +239,66 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 			displayInterests(null);
 		}
 	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+
+		inflater.inflate(R.menu.session_details, menu);
+
+		MenuItem actionItem = menu.findItem(R.id.menu_item_share_action_provider_action_bar);
+		ShareActionProvider actionProvider = (ShareActionProvider) actionItem.getActionProvider();
+		actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
+	}
+
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+
+		MenuItem actionItem = menu.findItem(R.id.menu_item_vote_favorite);
+		if (!mIsSession) {
+			if (mIsVoted) {
+				actionItem.setTitle(R.string.action_bar_vote_delete);
+			} else {
+				actionItem.setTitle(R.string.action_bar_vote_add);
+			}
+		} else {
+			if (mIsVoted) {
+				actionItem.setTitle(R.string.action_bar_favorite_delete);
+				actionItem.setIcon(R.drawable.ic_starred);
+			} else {
+				actionItem.setTitle(R.string.action_bar_favorite_add);
+				actionItem.setIcon(R.drawable.ic_star);
+			}
+		}
+
+		actionItem = menu.findItem(R.id.menu_item_share_action_provider_action_bar);
+		ShareActionProvider actionProvider = (ShareActionProvider) actionItem.getActionProvider();
+		actionProvider.setShareIntent(createShareIntent());
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == R.id.menu_item_vote_favorite) {
+			if (!mIsSession) {
+				voteForLightning(!mIsVoted);
+			} else {
+				favoriteSession(!mIsVoted);
+			}
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 	public void setSessionId(int sessionId) {
 		if (mSessionId != sessionId) {
 			mSessionId = sessionId;
-
+			
+			mIsFirstLoad = true;
+			
 			Bundle b = getArguments();
 			b.putInt(EXTRA_SESSION_ID, sessionId);
 
-//			clear();
 			reload();
 		}
 	}
@@ -266,6 +322,9 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 		final Intent i = UIUtils.fragmentArgumentsToIntent(args);
 		if (fetchIdSession(i.getData(), args) == -1) {
 			clear();
+			return;
+		}
+		if (getActivity() == null || isDetached()) {
 			return;
 		}
 		LoaderManager lm = getLoaderManager();
@@ -362,6 +421,25 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 			Log.e(TAG, "The TabContainer requested with tag TAB_INTERESTS is not a TabInterests object", e);
 		}
 	}
+	
+	public void refreshSessionData() {
+		if (isBound && serviceReady) {
+            setRefreshMode(true);
+            
+			Message msg = Message.obtain(null, mIsSession ? MixItService.MSG_TALK : MixItService.MSG_LIGHTNING_TALK, 0, 0);
+			msg.replyTo = messenger;
+			Bundle b = new Bundle();
+			b.putInt(MixItService.EXTRA_ID, mSessionId);
+			msg.setData(b);
+			try {
+				service.send(msg);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			
+			mIsFirstLoad = false;
+		}
+	}
 
 	private interface SessionQuery {
 		String[] PROJECTION = { BaseColumns._ID, MixItContract.Sessions.SESSION_ID, MixItContract.Sessions.TITLE, MixItContract.Sessions.TRACK_ID,
@@ -390,57 +468,27 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 	}
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-
-		inflater.inflate(R.menu.session_details, menu);
-
-		MenuItem actionItem = menu.findItem(R.id.menu_item_share_action_provider_action_bar);
-		ShareActionProvider actionProvider = (ShareActionProvider) actionItem.getActionProvider();
-		actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
+	public void onInterestItemClick(String interestId, String name) {
+		final Uri interestUri = MixItContract.Interests.buildInterestUri(interestId);
+		final Intent intent = new Intent(Intent.ACTION_VIEW, interestUri);
+		intent.putExtra(InterestsActivity.EXTRA_INTEREST_NAME, name);
+		intent.putExtra(InterestsActivity.EXTRA_IS_FROM_SESSION, true);
+		startActivity(intent);
 	}
 
-	@Override
-	public void onPrepareOptionsMenu(Menu menu) {
-		super.onPrepareOptionsMenu(menu);
-
-		MenuItem actionItem = menu.findItem(R.id.menu_item_vote_favorite);
-		if (!mIsSession) {
-			if (mIsVoted) {
-				actionItem.setTitle(R.string.action_bar_vote_delete);
-			} else {
-				actionItem.setTitle(R.string.action_bar_vote_add);
-			}
-		} else {
-			if (mIsVoted) {
-				actionItem.setTitle(R.string.action_bar_favorite_delete);
-				actionItem.setIcon(R.drawable.ic_starred);
-			} else {
-				actionItem.setTitle(R.string.action_bar_favorite_add);
-				actionItem.setIcon(R.drawable.ic_star);
-			}
-		}
-
-		actionItem = menu.findItem(R.id.menu_item_share_action_provider_action_bar);
-		ShareActionProvider actionProvider = (ShareActionProvider) actionItem.getActionProvider();
-		actionProvider.setShareIntent(createShareIntent());
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.menu_item_vote_favorite) {
-			if (!mIsSession) {
-				voteForLightning(!mIsVoted);
-			} else {
-				favoriteSession(!mIsVoted);
-			}
-		}
-		return super.onOptionsItemSelected(item);
+	private Intent createShareIntent() {
+		Intent shareIntent = new Intent(Intent.ACTION_SEND);
+		shareIntent.setType("text/plain");
+		shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+		shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_session_subject));
+		shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_session_text, mTitleStr, "http://http://www.mix-it.fr/sessions"));
+		return shareIntent;
 	}
 
 	void voteForLightning(boolean addVote) {
 		if (isBound && serviceReady) {
+            setRefreshMode(true);
+            
 			Message msg = Message.obtain(null, MixItService.MSG_VOTE_LIGHTNING_TALK, 0, 0);
 			msg.replyTo = messenger;
 			Bundle b = new Bundle();
@@ -457,6 +505,8 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 
 	void favoriteSession(boolean addFavorite) {
 		if (isBound && serviceReady) {
+            setRefreshMode(true);
+            
 			Message msg = Message.obtain(null, MixItService.MSG_STAR_SESSION, 0, 0);
 			msg.replyTo = messenger;
 			Bundle b = new Bundle();
@@ -474,6 +524,8 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 	@Override
 	protected void onMessageReceivedFromService(Message msg) {
 		if (msg.what == MixItService.MSG_VOTE_LIGHTNING_TALK) {
+            setRefreshMode(false);
+            
 			switch (msg.arg1) {
 			case MixItService.Response.STATUS_OK:
 				reload();
@@ -492,6 +544,8 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 				break;
 			}
 		} else if (msg.what == MixItService.MSG_STAR_SESSION) {
+            setRefreshMode(false);
+            
 			switch (msg.arg1) {
 			case MixItService.Response.STATUS_OK:
 				reload();
@@ -509,25 +563,24 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 			default:
 				break;
 			}
+		} else if (msg.what == MixItService.MSG_TALK || msg.what == MixItService.MSG_LIGHTNING_TALK) {
+            setRefreshMode(false);
+            
+			switch (msg.arg1) {
+			case MixItService.Response.STATUS_OK:
+				reload();
+				break;
+
+			case MixItService.Response.STATUS_ERROR:
+				break;
+
+			case MixItService.Response.STATUS_NO_CONNECTIVITY:
+				break;
+
+			default:
+				break;
+			}
 		}
-	}
-
-	private Intent createShareIntent() {
-		Intent shareIntent = new Intent(Intent.ACTION_SEND);
-		shareIntent.setType("text/plain");
-		shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-		shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_session_subject));
-		shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_session_text, mTitleStr, "http://http://www.mix-it.fr/sessions"));
-		return shareIntent;
-	}
-
-	@Override
-	public void onInterestItemClick(String interestId, String name) {
-		final Uri interestUri = MixItContract.Interests.buildInterestUri(interestId);
-		final Intent intent = new Intent(Intent.ACTION_VIEW, interestUri);
-		intent.putExtra(InterestsActivity.EXTRA_INTEREST_NAME, name);
-		intent.putExtra(InterestsActivity.EXTRA_IS_FROM_SESSION, true);
-		startActivity(intent);
 	}
 
 }

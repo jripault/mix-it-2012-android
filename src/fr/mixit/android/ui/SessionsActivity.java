@@ -12,9 +12,11 @@ import android.widget.ArrayAdapter;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
+import com.actionbarsherlock.view.Window;
 
 import fr.mixit.android.R;
 import fr.mixit.android.provider.MixItContract;
+import fr.mixit.android.ui.fragments.BoundServiceContract;
 import fr.mixit.android.ui.fragments.MemberDetailsFragment;
 import fr.mixit.android.ui.fragments.SessionDetailsFragment;
 import fr.mixit.android.ui.fragments.SessionDetailsFragment.SessionDetailsContract;
@@ -22,7 +24,7 @@ import fr.mixit.android.ui.fragments.SessionsListFragment;
 import fr.mixit.android.utils.IntentUtils;
 import fr.mixit.android.utils.UIUtils;
 
-public class SessionsActivity extends GenericMixItActivity implements OnNavigationListener, SessionDetailsContract {
+public class SessionsActivity extends GenericMixItActivity implements OnNavigationListener, SessionDetailsContract, BoundServiceContract {
 
 	public static final int DISPLAY_MODE_SESSIONS = 1204101927;
 	public static final int DISPLAY_MODE_LIGHTNING_TALKS = 1204101928;
@@ -43,6 +45,8 @@ public class SessionsActivity extends GenericMixItActivity implements OnNavigati
 
 	@Override
 	protected void onCreate(Bundle savedStateInstance) {
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        
 		super.onCreate(savedStateInstance);
 
 		mode = getIntent().getBooleanExtra(EXTRA_STARRED_MODE, false) ? DISPLAY_MODE_SESSIONS_STARRED : DISPLAY_MODE_SESSIONS;
@@ -197,6 +201,11 @@ public class SessionsActivity extends GenericMixItActivity implements OnNavigati
 	@Override
 	public void refreshList() {
 		sessionsListFrag.reload();
+	}
+
+	@Override
+	public void setRefreshMode(boolean state) {
+        setSupportProgressBarIndeterminateVisibility(state);
 	}
 
 }

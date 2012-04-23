@@ -86,4 +86,5 @@
     <string name="about_text2">Mathieu Calba\nmathieu.calba@gmail.com</string>
     <string name="about_text3">Source code available at https://github.com/jripault/mix-it-2012-android</string>
     <string name="about_text4">Version %s</string>
+    <string name="about_text5">Uses some useful libraries :\n- ActionBarSherlock - http://actionbarsherlock.com/\n- Universal Image Loader - https://github.com/nostra13/Android-Universal-Image-Loader</string>
 </resources>

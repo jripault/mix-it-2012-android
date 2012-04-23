@@ -93,6 +93,8 @@ public class LoginAndroidAccountsListFragment extends BoundServiceFragment imple
 		}
 		adapter = new AccountAdapter(accounts, getActivity());
 		lv.setAdapter(adapter);
+		
+		setRefreshMode(false);
 	}
 
 	@Override

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.RemoteException;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -12,16 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.SherlockListFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import fr.mixit.android.R;
 import fr.mixit.android.provider.MixItContract;
+import fr.mixit.android.services.MixItService;
 import fr.mixit.android.ui.MembersActivity;
 import fr.mixit.android.ui.adapters.MembersAdapter;
 import fr.mixit.android.utils.UIUtils;
 
-public class MembersListFragment extends SherlockListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MembersListFragment extends BoundServiceListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	static final int CURSOR_MEMBERS = 1003;
 
@@ -34,7 +36,8 @@ public class MembersListFragment extends SherlockListFragment implements LoaderM
 	boolean mHasSetEmptyText = false;
 	int mode = MembersActivity.DISPLAY_MODE_ALL_MEMBERS;
 	ImageLoader mImageLoader = ImageLoader.getInstance();
-	
+	boolean mIsFirstLoad = true;
+
 	public static MembersListFragment newInstance(Intent intent) {
 		MembersListFragment f = new MembersListFragment();
 		f.setArguments(UIUtils.intentToFragmentArguments(intent));
@@ -89,6 +92,9 @@ public class MembersListFragment extends SherlockListFragment implements LoaderM
 	}
 	
 	public void reload() {
+		if (getActivity() == null || isDetached()) {
+			return;
+		}
 		LoaderManager lm = getLoaderManager();
 		lm.destroyLoader(CURSOR_MEMBERS);
 		lm.restartLoader(CURSOR_MEMBERS, getArguments(), this);
@@ -122,6 +128,10 @@ public class MembersListFragment extends SherlockListFragment implements LoaderM
 			if (mCheckedPosition >= 0 && getView() != null) {
 				getListView().setItemChecked(mCheckedPosition, true);
 			}
+			
+			if (mIsFirstLoad) {
+				refreshMembersData();
+			}
 		}
 	}
 
@@ -149,6 +159,45 @@ public class MembersListFragment extends SherlockListFragment implements LoaderM
 		getListView().setItemChecked(position, true);
 		mCheckedPosition = position;
 	}
+	
+	void refreshMembersData() {
+		if (isBound && serviceReady) {
+            setRefreshMode(true);
+
+			Message msg = Message.obtain(null, MixItService.MSG_MEMBERS, 0, 0);
+			msg.replyTo = messenger;
+			Bundle b = new Bundle();
+			msg.setData(b);
+			try {
+				service.send(msg);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			
+			mIsFirstLoad = false;
+		}
+	}
+
+	@Override
+	protected void onMessageReceivedFromService(Message msg) {
+		if (msg.what == MixItService.MSG_MEMBERS) {
+			switch (msg.arg1) {
+			case MixItService.Response.STATUS_OK:
+				reload();
+				break;
+
+			case MixItService.Response.STATUS_ERROR:
+				break;
+
+			case MixItService.Response.STATUS_NO_CONNECTIVITY:
+				break;
+
+			default:
+				break;
+			}
+            setRefreshMode(false);
+		}
+	}
 
 	public void clearCheckedPosition() {
 		if (mCheckedPosition >= 0) {
@@ -161,6 +210,8 @@ public class MembersListFragment extends SherlockListFragment implements LoaderM
 //		if (mode != displayMode) { 
 			mode = displayMode;
 			
+			mIsFirstLoad = true;
+
 			clearCheckedPosition();
 //		}
 	}

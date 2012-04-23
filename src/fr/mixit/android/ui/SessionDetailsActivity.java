@@ -1,18 +1,23 @@
 package fr.mixit.android.ui;
 
+import com.actionbarsherlock.view.Window;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import fr.mixit.android.R;
+import fr.mixit.android.ui.fragments.BoundServiceContract;
 import fr.mixit.android.ui.fragments.SessionDetailsFragment;
 import fr.mixit.android.ui.fragments.SessionDetailsFragment.SessionDetailsContract;
 
-public class SessionDetailsActivity extends GenericMixItActivity implements SessionDetailsContract {
+public class SessionDetailsActivity extends GenericMixItActivity implements SessionDetailsContract, BoundServiceContract {
 
 	SessionDetailsFragment sessionDetailsFrag;
 
 	@Override
 	protected void onCreate(Bundle savedStateInstance) {
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
 		super.onCreate(savedStateInstance);
 
 		FragmentManager fm = getSupportFragmentManager();
@@ -43,6 +48,11 @@ public class SessionDetailsActivity extends GenericMixItActivity implements Sess
 
 	public Intent getGreatGrandParentIntent() {
 		return null;
+	}
+
+	@Override
+	public void setRefreshMode(boolean state) {
+        setSupportProgressBarIndeterminateVisibility(state);
 	}
 
 }
