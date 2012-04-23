@@ -16,6 +16,7 @@ public class TabInterests extends TabContainer implements OnItemClickListener {
 
 	ListView mListView;
 	InterestsAdapter mAdapter;
+	boolean mIsFromSession;
 
 	public interface InterestsListener {
 		public void onInterestItemClick(String interestId, String name);
@@ -23,10 +24,11 @@ public class TabInterests extends TabContainer implements OnItemClickListener {
 
 	InterestsListener mListener;
 
-	public TabInterests(Context ctx, ViewGroup container, InterestsListener listener) {
+	public TabInterests(Context ctx, ViewGroup container, InterestsListener listener, boolean isFromSession) {
 		super(ctx, container);
 
 		mListener = listener;
+		mIsFromSession = isFromSession;
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class TabInterests extends TabContainer implements OnItemClickListener {
 		// TODO : use ViewAnimator to switch between list and empty ?
 		if (c != null && c.moveToFirst()) {
 			if (mAdapter == null) {
-				mAdapter = new InterestsAdapter(mContext);
+				mAdapter = new InterestsAdapter(mContext, mIsFromSession);
 				mListView.setAdapter(mAdapter);
 			}
 

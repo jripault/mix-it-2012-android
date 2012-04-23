@@ -36,6 +36,9 @@ public class MixItContract {
 	    public static final String CONTENT_ITEM_TYPE =
 	            "vnd.android.cursor.item/vnd.mixit.interest";
 
+	    public static final String SESSIONS_COUNT = "sessions_count";
+	    public static final String MEMBERS_COUNT = "members_count";
+
 	    public static final String DEFAULT_SORT = MixItDatabase.Tables.INTERESTS + "." + InterestsColumns.NAME + " ASC";
 
 		public static Uri buildInterestUri(String interestId) {

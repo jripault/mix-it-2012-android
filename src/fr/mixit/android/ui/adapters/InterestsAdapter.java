@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class InterestsAdapter extends CursorAdapter implements SectionIndexer {
 
 	LayoutInflater inflater;
-
+	boolean mIsFromSession = true;
 	private AlphabetIndexer mIndexer;
 
 	class InterestHolder {
@@ -25,9 +25,10 @@ public class InterestsAdapter extends CursorAdapter implements SectionIndexer {
 		TextView nbSession;
 	}
 
-	public InterestsAdapter(Context mContext) {
+	public InterestsAdapter(Context mContext, boolean isFromSession) {
 		super(mContext, null, 0);
 
+		mIsFromSession = isFromSession;
 		inflater = LayoutInflater.from(mContext);
 		mIndexer = new AlphabetIndexer(null, InterestsQuery.NAME, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 	}
@@ -68,26 +69,24 @@ public class InterestsAdapter extends CursorAdapter implements SectionIndexer {
 	public void bindView(View view, Context mContext, Cursor cursor) {
 		InterestHolder holder = (InterestHolder) view.getTag();
 		holder.name.setText(cursor.getString(InterestsQuery.NAME));
-		holder.nbSession.setText(cursor.getString(InterestsQuery.INTEREST_ID)); // TODO change for number of sessions for this interest
+		holder.nbSession.setText(cursor.getString(mIsFromSession ? InterestsQuery.SESSIONS_COUNT : InterestsQuery.MEMBERS_COUNT));
 		NinePatchDrawable drawable = (NinePatchDrawable) holder.nbSession.getBackground();
 		drawable.setColorFilter(new LightingColorFilter(mContext.getResources().getColor(R.color.foreground1), 1));
 	}
 
 	public interface InterestsQuery {
-		String[] PROJECTION = {
-				MixItContract.Interests._ID,
-				MixItContract.Interests.INTEREST_ID,
-				MixItContract.Interests.NAME,
-		};
-		
-		String[] PROJECTION_WITH_SESSIONS_COUNT = {
-				MixItContract.Interests._ID,
-				MixItContract.Interests.INTEREST_ID,
-				MixItContract.Interests.NAME,
-		};
+		String[] PROJECTION = { MixItContract.Interests._ID, MixItContract.Interests.INTEREST_ID, MixItContract.Interests.NAME, };
+
+		String[] PROJECTION_WITH_SESSIONS_COUNT = { MixItContract.Interests._ID, MixItContract.Interests.INTEREST_ID, MixItContract.Interests.NAME,
+				MixItContract.Interests.SESSIONS_COUNT, };
+
+		String[] PROJECTION_WITH_MEMBERS_COUNT = { MixItContract.Interests._ID, MixItContract.Interests.INTEREST_ID, MixItContract.Interests.NAME,
+				MixItContract.Interests.MEMBERS_COUNT, };
 
 		int _ID = 0;
 		int INTEREST_ID = 1;
 		int NAME = 2;
+		int SESSIONS_COUNT = 3;
+		int MEMBERS_COUNT = 3;
 	}
 }

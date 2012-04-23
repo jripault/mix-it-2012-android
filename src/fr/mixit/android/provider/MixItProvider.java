@@ -648,7 +648,9 @@ public class MixItProvider extends ContentProvider {
 		final SelectionBuilder builder = new SelectionBuilder();
 		switch (match) {
 		case INTERESTS:
-			return builder.table(MixItDatabase.Tables.INTERESTS);
+			return builder.table(MixItDatabase.Tables.INTERESTS)
+			        .map(MixItContract.Interests.SESSIONS_COUNT, Subquery.TAG_SESSIONS_COUNT)
+			        .map(MixItContract.Interests.MEMBERS_COUNT, Subquery.TAG_MEMBERS_COUNT);
 		case INTERESTS_ID: {
 			final String interestId = MixItContract.Interests.getInterestId(uri);
 			return builder.table(MixItDatabase.Tables.INTERESTS)
@@ -696,6 +698,7 @@ public class MixItProvider extends ContentProvider {
 			return builder.table(MixItDatabase.Tables.MEMBERS_INTERESTS_JOIN_INTERESTS)
             		.mapToTable(MixItContract.Interests._ID, MixItDatabase.Tables.INTERESTS)
             		.mapToTable(MixItContract.Interests.INTEREST_ID, MixItDatabase.Tables.INTERESTS)
+			        .map(MixItContract.Interests.MEMBERS_COUNT, Subquery.TAG_MEMBERS_COUNT)
             		.where(MixItDatabase.Tables.MEMBERS_INTERESTS + "." + MixItDatabase.MembersInterests.MEMBER_ID + "=?", memberId);
 		}
 		case MEMBERS_ID_BADGES: {
@@ -815,6 +818,7 @@ public class MixItProvider extends ContentProvider {
 			return builder.table(MixItDatabase.Tables.SESSIONS_INTERESTS_JOIN_INTERESTS)
 					.mapToTable(MixItContract.Interests._ID, MixItDatabase.Tables.INTERESTS)
 					.mapToTable(MixItContract.Interests.INTEREST_ID, MixItDatabase.Tables.INTERESTS)
+			        .map(MixItContract.Interests.SESSIONS_COUNT, Subquery.TAG_SESSIONS_COUNT)
 					.where(MixItDatabase.Tables.SESSIONS_INTERESTS + "." + SessionsInterests.SESSION_ID + "=?", sessionsId);
 		}
 //		case SESSIONS_ID_INTERESTS_ID: {
@@ -922,6 +926,17 @@ public class MixItProvider extends ContentProvider {
 		default:
 			throw new UnsupportedOperationException("Unknown uri: " + uri);
 		}
+	}
+	
+	private interface Subquery {
+		String TAG_SESSIONS_COUNT = "(SELECT COUNT(" + MixItDatabase.Tables.SESSIONS_INTERESTS + "." + MixItDatabase.SessionsInterests.INTEREST_ID
+				+ ") FROM " + MixItDatabase.Tables.SESSIONS_INTERESTS + " WHERE "
+				+ MixItDatabase.Tables.SESSIONS_INTERESTS + "." + MixItDatabase.SessionsInterests.INTEREST_ID + "="
+				+ MixItDatabase.Tables.INTERESTS + "." + MixItContract.Interests.INTEREST_ID + ")";
+		String TAG_MEMBERS_COUNT = "(SELECT COUNT(" + MixItDatabase.Tables.MEMBERS_INTERESTS + "." + MixItDatabase.MembersInterests.INTEREST_ID
+				+ ") FROM " + MixItDatabase.Tables.MEMBERS_INTERESTS + " WHERE "
+				+ MixItDatabase.Tables.MEMBERS_INTERESTS + "." + MixItDatabase.MembersInterests.INTEREST_ID + "="
+				+ MixItDatabase.Tables.INTERESTS + "." + MixItContract.Interests.INTEREST_ID + ")";
 	}
 
 }

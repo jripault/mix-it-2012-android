@@ -137,7 +137,7 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 		// mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_IN_PARALLEL).setIndicator(getString(R.string.session_in_parallel)), tabContainer);
 		// tabContainer = new TabSessionActivities(getActivity(), mViewPager);
 		// mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_ACTIVITIES).setIndicator(getString(R.string.session_activities)), tabContainer);
-		tabContainer = new TabInterests(getActivity(), mViewPager, this);
+		tabContainer = new TabInterests(getActivity(), mViewPager, this, true);
 		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_INTERESTS).setIndicator(UIUtils.createTabView(getActivity(), getString(R.string.session_interests))), tabContainer);
 
 		clear();
@@ -201,7 +201,7 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 				return null;
 			} else {
 				Uri interestsUri = MixItContract.Sessions.buildInterestsDirUri(String.valueOf(mSessionId));
-				return new CursorLoader(getActivity(), interestsUri, InterestsAdapter.InterestsQuery.PROJECTION, null, null,
+				return new CursorLoader(getActivity(), interestsUri, InterestsAdapter.InterestsQuery.PROJECTION_WITH_SESSIONS_COUNT, MixItContract.Interests.SESSIONS_COUNT + ">0", null,
 						MixItContract.Interests.DEFAULT_SORT);
 			}
 		}

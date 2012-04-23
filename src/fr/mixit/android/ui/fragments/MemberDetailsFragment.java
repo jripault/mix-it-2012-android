@@ -166,7 +166,7 @@ public class MemberDetailsFragment extends BoundServiceFragment implements Loade
 		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_LIGHTNINGS).setIndicator(UIUtils.createTabView(getActivity(), getString(R.string.member_lightnings))), tabContainer);
 		// tabContainer = new TabSessions(getActivity(), mViewPager, this);
 		// mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_STARRED_SESSIONS).setIndicator(UIUtils.createTabView(getActivity(), getString(R.string.member_starred_sessions))), tabContainer);
-		tabContainer = new TabInterests(getActivity(), mViewPager, this);
+		tabContainer = new TabInterests(getActivity(), mViewPager, this, false);
 		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_INTERESTS).setIndicator(UIUtils.createTabView(getActivity(), getString(R.string.member_interests))), tabContainer);
 		tabContainer = new TabSharedLinks(getActivity(), mViewPager, this);
 		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_SHARED_LINKS).setIndicator(UIUtils.createTabView(getActivity(), getString(R.string.member_shared_links))), tabContainer);
@@ -248,7 +248,7 @@ public class MemberDetailsFragment extends BoundServiceFragment implements Loade
 				return null;
 			} else {
 				Uri interestsUri = MixItContract.Members.buildInterestsDirUri(String.valueOf(mMemberId));
-				return new CursorLoader(getActivity(), interestsUri, InterestsAdapter.InterestsQuery.PROJECTION, null, null,
+				return new CursorLoader(getActivity(), interestsUri, InterestsAdapter.InterestsQuery.PROJECTION_WITH_MEMBERS_COUNT, MixItContract.Interests.MEMBERS_COUNT + ">0", null,
 						MixItContract.Interests.DEFAULT_SORT);
 			}
 		} else if (id == CURSOR_SHARED_LINKS) {
