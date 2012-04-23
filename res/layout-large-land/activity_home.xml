@@ -19,12 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             class="fr.mixit.android.ui.fragments.StreamFragment" />
-        <fragment
-            android:id="@+id/fragment_whats_next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/fragment_stream"
-            class="fr.mixit.android.ui.fragments.WhatsNextFragment" />
+        <!-- <fragment -->
+        <!-- android:id="@+id/fragment_whats_next" -->
+        <!-- android:layout_width="match_parent" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_alignParentBottom="true" -->
+        <!-- android:layout_below="@id/fragment_stream" -->
+        <!-- class="fr.mixit.android.ui.fragments.WhatsNextFragment" /> -->
     </RelativeLayout>
 </LinearLayout>
