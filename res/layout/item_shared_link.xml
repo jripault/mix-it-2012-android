@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/ListItemContainer"
-    android:layout_width="fill_parent"
+    android:id="@+id/list_item_session"
+    style="@style/SimpleListItem"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content" >
     <TextView
         android:id="@+id/shared_link_title"
-        style="@style/ListItemContent"
+        style="@style/ListItemTitle"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true" />
+    <TextView
+        android:id="@+id/shared_link_subtitle"
+        style="@style/ListItemSubtitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/shared_link_title" />
 </RelativeLayout>

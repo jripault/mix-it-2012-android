@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="8dp" >
     <TextView
         android:id="@+id/session_summary"
         android:layout_width="match_parent"
@@ -12,7 +13,8 @@
         android:id="@+id/session_speakers_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/session_summary_speakers" />
+        android:text="@string/session_summary_speakers"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/session_no_speaker"
         android:layout_width="match_parent"

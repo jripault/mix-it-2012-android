@@ -17,6 +17,7 @@ public class SharedLinksAdapter extends CursorAdapter {
 
 	class SharedLinkHolder {
 		TextView title;
+		TextView subtitle;
 	}
 
 	public SharedLinksAdapter(Context ctx) {
@@ -30,6 +31,7 @@ public class SharedLinksAdapter extends CursorAdapter {
 		View v = inflater.inflate(R.layout.item_shared_link, parent, false);
 		SharedLinkHolder holder = new SharedLinkHolder();
 		holder.title = (TextView) v.findViewById(R.id.shared_link_title);
+		holder.subtitle = (TextView) v.findViewById(R.id.shared_link_subtitle);
 		v.setTag(holder);
 		return v;
 	}
@@ -38,6 +40,7 @@ public class SharedLinksAdapter extends CursorAdapter {
 	public void bindView(View view, Context context, Cursor cursor) {
 		SharedLinkHolder holder = (SharedLinkHolder) view.getTag();
 		holder.title.setText(cursor.getString(SharedLinkQuery.NAME));
+		holder.subtitle.setText(cursor.getString(SharedLinkQuery.URL));
 	}
 
 	public interface SharedLinkQuery {

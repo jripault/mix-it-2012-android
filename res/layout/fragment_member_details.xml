@@ -19,12 +19,14 @@
         android:orientation="vertical" >
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/member_image_padding" >
             <ImageView
                 android:id="@+id/member_image"
                 android:layout_width="@dimen/member_image_width_big"
                 android:layout_height="@dimen/member_image_height_big"
-                android:layout_margin="@dimen/member_image_padding"
+                android:layout_marginBottom="@dimen/member_image_padding"
+                android:layout_marginRight="@dimen/member_image_padding"
                 android:contentDescription="@string/desc_member_image"
                 android:scaleType="fitCenter" />
             <TextView
@@ -33,7 +35,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/member_image"
                 android:layout_alignRight="@id/member_image"
-                android:layout_below="@id/member_image" />
+                android:layout_below="@id/member_image"
+                android:gravity="center" />
             <TextView
                 android:id="@+id/member_name"
                 android:layout_width="wrap_content"

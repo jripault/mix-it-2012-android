@@ -22,7 +22,7 @@ public class MixItApplication extends Application {
 			.denyCacheImageMultipleSizesInMemory()
 			.build();
 		ImageLoader.getInstance().init(config);
-		ImageLoader.getInstance().enableLogging();
+//		ImageLoader.getInstance().enableLogging();
 	}
 
 }

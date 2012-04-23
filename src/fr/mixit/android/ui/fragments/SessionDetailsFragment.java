@@ -109,7 +109,7 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 		mViewAnimator = (ViewAnimator) root.findViewById(R.id.session_animator);
 		mTitle = (TextView) root.findViewById(R.id.session_title);
 		mTime = (TextView) root.findViewById(R.id.session_time);
-
+		mTime.setVisibility(View.GONE);
 		mTabHost = (TabHost) root.findViewById(android.R.id.tabhost);
 		mViewPager = (ViewPager) root.findViewById(R.id.pager);
 		return root;

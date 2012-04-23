@@ -19,12 +19,18 @@
         android:orientation="vertical" >
         <TextView
             android:id="@+id/session_title"
+            style="@style/ItemTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" />
         <TextView
             android:id="@+id/session_time"
+            style="@style/ItemSubTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" />
         <TabHost
             android:id="@android:id/tabhost"
             android:layout_width="match_parent"

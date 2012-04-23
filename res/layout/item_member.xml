@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:paddingBottom="2dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="2dp" >
     <ImageView
         android:id="@+id/member_image"
         android:layout_width="@dimen/member_image_width"
         android:layout_height="@dimen/member_image_height"
         android:layout_marginRight="@dimen/member_image_padding"
-        android:layout_marginTop="4dip"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter" />
     <TextView

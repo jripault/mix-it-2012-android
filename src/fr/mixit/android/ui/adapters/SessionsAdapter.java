@@ -47,6 +47,7 @@ public class SessionsAdapter extends CursorAdapter {
 		drawable.setColorFilter(new LightingColorFilter(mContext.getResources().getColor(R.color.star_color), 1));
 		holder.title = (TextView) v.findViewById(R.id.session_title);
 		holder.subtitle = (TextView) v.findViewById(R.id.session_subtitle);
+		holder.subtitle.setVisibility(View.GONE);
 		holder.track = v.findViewById(R.id.session_track);
 		v.setTag(holder);
 		return v;

@@ -3,6 +3,7 @@
     <style name="Widget" />
     <style name="Widget.MixIt" />
     <style name="Widget.Styled.ActionBar" parent="Widget.Sherlock.ActionBar.Solid"> <!-- <item name="background">@drawable/bg_striped</item> -->
+        <item name="titleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse</item>
         <!-- <item name="android:background">@drawable/bg_striped</item> -->
         <!-- <item name="backgroundSplit">@drawable/bg_striped_split</item> -->
         <!-- <item name="android:backgroundSplit">@drawable/bg_striped_split</item> -->
@@ -56,12 +57,23 @@
         <item name="android:background">@drawable/abs__tab_indicator_ab_holo</item>
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:paddingLeft">5dip</item>
+        <item name="android:paddingRight">5dip</item>
         <item name="android:minWidth">80dip</item>
         <!-- <item name="android:layout_height">@dimen/abs__action_bar_default_height</item> -->
         <item name="android:minHeight">@dimen/abs__action_bar_default_height</item>
     </style>
     <style name="Widget.MixIt.TabText" parent="Widget.Sherlock.ActionBar.TabText">
         <item name="android:maxWidth">180dip</item>
+    </style>
+    <style name="ItemTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/body_text_1</item>
+    </style>
+    <style name="ItemSubTitle">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/body_text_2</item>
     </style>
     <style name="ListItemTitle">
         <item name="android:textStyle">bold</item>
@@ -93,7 +105,7 @@
     <!-- About -->
     <style name="AboutText">
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-<!--         <item name="android:textSize">@dimen/text_size_about</item> -->
+        <!-- <item name="android:textSize">@dimen/text_size_about</item> -->
         <item name="android:paddingBottom">10dip</item>
         <!-- <item name="android:textStyle">normal</item> -->
         <!-- <item name="android:textColor">@color/title_text_alt</item> -->
