@@ -20,6 +20,7 @@ public class SessionDetailsActivity extends GenericMixItActivity implements Sess
 
 		super.onCreate(savedStateInstance);
 
+        setRefreshMode(false);
 		FragmentManager fm = getSupportFragmentManager();
 		sessionDetailsFrag = (SessionDetailsFragment) fm.findFragmentByTag(SessionDetailsFragment.TAG);
 		if (sessionDetailsFrag == null) {

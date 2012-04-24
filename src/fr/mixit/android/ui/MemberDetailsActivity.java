@@ -24,6 +24,7 @@ public class MemberDetailsActivity extends GenericMixItActivity implements /*Mem
 
 		super.onCreate(savedStateInstance);
 		
+        setRefreshMode(false);
 		FragmentManager fm = getSupportFragmentManager();
 		memberDetailsFrag = (MemberDetailsFragment) fm.findFragmentByTag(MemberDetailsFragment.TAG);
 		if (memberDetailsFrag == null) {

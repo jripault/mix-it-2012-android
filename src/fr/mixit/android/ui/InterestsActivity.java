@@ -54,6 +54,7 @@ public class InterestsActivity extends GenericMixItActivity implements TabListen
 		
 		super.onCreate(savedStateInstance);
 
+        setRefreshMode(false);
 		if (savedStateInstance != null) {
 			mSelectedTab = savedStateInstance.getInt(STATE_TAB_SELECTED, mSelectedTab);
 		}

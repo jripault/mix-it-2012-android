@@ -20,7 +20,7 @@
     <string name="btn_map">Carte</string>
     <!-- Sessions -->
     <string name="empty_sessions">Pas de sessions trouvées</string>
-    <string name="session_details">Détail d\'une sessions</string>
+    <string name="session_details">Session</string>
     <string name="all_sessions">Sessions</string>
     <string name="all_lightning_talks">Lightning Talks</string>
     <string name="track_agility">Agility</string>
@@ -48,7 +48,7 @@
     <string name="no_session">Pas de session selecitonnée</string>
     <!-- Members -->
     <string name="empty_members">Pas de membre trouvé</string>
-    <string name="member_details">Details d\'un membre</string>
+    <string name="member_details">Membre</string>
     <string name="all_members">Membres</string>
     <string name="all_speakers">Speakers</string>
     <string name="member_desc">Bio</string>

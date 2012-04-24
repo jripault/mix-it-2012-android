@@ -20,7 +20,7 @@
     <string name="btn_map">Map</string>
     <!-- Sessions -->
     <string name="empty_sessions">No sessions found</string>
-    <string name="session_details">Session\'s Details</string>
+    <string name="session_details">Session</string>
     <string name="all_sessions">Sessions</string>
     <string name="all_lightning_talks">Lightning Talks</string>
     <string name="track_agility">Agility</string>
@@ -48,7 +48,7 @@
     <string name="no_session">No Session Selected</string>
     <!-- Members -->
     <string name="empty_members">No members found</string>
-    <string name="member_details">Member\'s Details</string>
+    <string name="member_details">Member</string>
     <string name="all_members">Members</string>
     <string name="all_speakers">Speakers</string>
     <string name="member_desc">Bio</string>
@@ -64,7 +64,7 @@
     <string name="no_member">No Member Selected</string>
     <string name="desc_member_image">Member\'s Image</string>
     <!-- Interests -->
-    <string name="interest_details">Interest\'s Details</string>
+    <string name="interest_details">Interest</string>
     <!-- Login -->
     <string name="login">Login</string>
     <string name="login_mixit_title">Login with your Mix-IT account</string>
@@ -80,6 +80,15 @@
     <string name="login_oauth_failed">Error while connecting with your %1$s account</string>
     <string name="error_login">Error while connecting to your Mix-IT account</string>
     <string name="login_successful">Login with your Mix-IT account</string>
+    <!-- Map -->
+    <string name="map_title">Comment accéder au site?</string>
+    <string name="access_title">Lieu :</string>
+    <string name="access_content">SUPINFO LYON\n
+Les Jardins d\'Osaka\n
+16 Rue Jean Desparmet\n
+69008 LYON\n
+Nous vous convions à privilégier les transports en commun, les vélos ou la marche pour venir à la conférence. C\'est plus écologique et sachez aussi que les places de parking aux alentours de SUPINFO ne sont pas nombreuses!</string>
+    <string name="mixit_map_url">http://www.mix-it.fr/infos/acces</string>
     <!-- About -->
     <string name="action_bar_about">About</string>
     <string name="about_text1">Source code created for the MixIt Conference by:</string>

@@ -27,6 +27,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.petebevin.markdown.MarkdownProcessor;
 
+import fr.mixit.android.MixItApplication;
 import fr.mixit.android.R;
 import fr.mixit.android.provider.MixItContract;
 import fr.mixit.android.services.MixItService;
@@ -94,12 +95,6 @@ public class MemberDetailsFragment extends BoundServiceFragment implements Loade
 	
 	ImageLoader mImageLoader = ImageLoader.getInstance();
 	boolean mIsFirstLoad = true;
-
-	// public interface MemberDetailsContract {
-	// public void onLinkOrLinkerItemClick(int memberId);
-	// }
-	//
-	// MemberDetailsContract mContract;
 
 	public static MemberDetailsFragment newInstance(Intent intent) {
 		MemberDetailsFragment f = new MemberDetailsFragment();
@@ -520,6 +515,9 @@ public class MemberDetailsFragment extends BoundServiceFragment implements Loade
 	}
 	
 	void refreshMemberData() {
+		if (MixItApplication.FORCE_OFFLINE) {
+			return;
+		}
 		if (isBound && serviceReady) {
             setRefreshMode(true);
 

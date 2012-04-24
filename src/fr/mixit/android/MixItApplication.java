@@ -7,7 +7,8 @@ import android.app.Application;
 
 public class MixItApplication extends Application {
 	
-	public static final boolean DEBUG_MODE = true;
+	public static final boolean DEBUG_MODE = false;
+	public static final boolean FORCE_OFFLINE = true;
 
 	@Override
 	public void onCreate() {

@@ -24,6 +24,7 @@ public class LoginMixItActivity extends GenericMixItActivity implements LoginMix
 
 		super.onCreate(savedStateInstance);
 
+        setRefreshMode(false);
 		FragmentManager fm = getSupportFragmentManager();
 		mLoginMixItFragment = (LoginMixItFragment) fm.findFragmentByTag(AccountFragment.TAG);
 		if (mLoginMixItFragment == null) {

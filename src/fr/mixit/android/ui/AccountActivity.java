@@ -22,7 +22,8 @@ public class AccountActivity extends GenericMixItActivity implements BoundServic
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
 		super.onCreate(savedStateInstance);
-
+		
+		setRefreshMode(false);
 		FragmentManager fm = getSupportFragmentManager();
 		mAccountFrag = (AccountFragment) fm.findFragmentByTag(AccountFragment.TAG);
 		if (mAccountFrag == null) {

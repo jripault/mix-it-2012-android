@@ -910,7 +910,7 @@ public class MixItService extends Service {
 	        final boolean remoteParse = localVersion < PrefUtils.VERSION_REMOTE;
 		    final boolean forceRemoteRefresh = bundle.getBoolean(EXTRA_FORCE_REFRESH, true); // TODO : change the force refresh to user intention only
 //		    final boolean hasContentChanged = hasContentChanged(resolver, httpClient);
-		    return remoteParse || forceRemoteRefresh/* || hasContentChanged*/;
+		    return !MixItApplication.FORCE_OFFLINE && (remoteParse || forceRemoteRefresh)/* || hasContentChanged*/;
 	    }
 	    return false;
 	}

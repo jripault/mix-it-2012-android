@@ -23,6 +23,7 @@ public class LoginOAuthActivity extends GenericMixItActivity implements LoginOAu
 
 		super.onCreate(bundle);
 
+        setRefreshMode(false);
 		FragmentManager fm = getSupportFragmentManager();
 		mLoginFrag = (LoginOAuthFragment) fm.findFragmentByTag(LoginOAuthFragment.TAG);
 		if (mLoginFrag == null) {

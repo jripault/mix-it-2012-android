@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
+import fr.mixit.android.MixItApplication;
 import fr.mixit.android.R;
 import fr.mixit.android.ui.MapActivity;
 import fr.mixit.android.ui.MembersActivity;
@@ -19,7 +20,7 @@ public class DashboardFragment extends SherlockFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+		View root = inflater.inflate(MixItApplication.FORCE_OFFLINE ? R.layout.fragment_dashboard_offline : R.layout.fragment_dashboard, container, false);
 
 		// Attach event handlers
 		View v = root.findViewById(R.id.home_btn_schedule);

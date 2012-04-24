@@ -27,18 +27,17 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.ShareActionProvider;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import fr.mixit.android.MixItApplication;
 import fr.mixit.android.R;
 import fr.mixit.android.provider.MixItContract;
 import fr.mixit.android.services.MixItService;
 import fr.mixit.android.ui.InterestsActivity;
-import fr.mixit.android.ui.adapters.CommentsAdapter;
 import fr.mixit.android.ui.adapters.InterestsAdapter;
 import fr.mixit.android.ui.adapters.MembersAdapter;
 import fr.mixit.android.ui.adapters.TabsAdapter;
 import fr.mixit.android.ui.controller.TabContainer;
 import fr.mixit.android.ui.controller.TabInterests;
 import fr.mixit.android.ui.controller.TabInterests.InterestsListener;
-import fr.mixit.android.ui.controller.TabSessionComments;
 import fr.mixit.android.ui.controller.TabSessionSummarySpeakers;
 import fr.mixit.android.ui.controller.TabSessionSummarySpeakers.SpeakersListener;
 import fr.mixit.android.utils.IntentUtils;
@@ -49,16 +48,16 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 	public static final String TAG = SessionDetailsFragment.class.getSimpleName();
 	
 	static final int CURSOR_SESSION = 1006;
-	static final int CURSOR_COMMENTS = 1007;
+//	static final int CURSOR_COMMENTS = 1007;
 	static final int CURSOR_SPEAKERS = 1008;
-	static final int CURSOR_ACTIVITIES = 1009;
-	static final int CURSOR_IN_PARALLEL = 1010;
+//	static final int CURSOR_ACTIVITIES = 1009;
+//	static final int CURSOR_IN_PARALLEL = 1010;
 	static final int CURSOR_INTERESTS = 1011;
 
 	static final String TAB_SUMMARY = "summary";
-	static final String TAB_COMMENTS = "comments";
-	static final String TAB_IN_PARALLEL = "in_parallel";
-	static final String TAB_ACTIVITIES = "activities";
+//	static final String TAB_COMMENTS = "comments";
+//	static final String TAB_IN_PARALLEL = "in_parallel";
+//	static final String TAB_ACTIVITIES = "activities";
 	static final String TAB_INTERESTS = "interests";
 
 	static final String EXTRA_SESSION_ID = "fr.mixit.android.ui.fragments.EXTRA_SESSION_ID";
@@ -131,8 +130,8 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 
 		TabContainer tabContainer = new TabSessionSummarySpeakers(getActivity(), mViewPager, this, mImageLoader);
 		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_SUMMARY).setIndicator(UIUtils.createTabView(getActivity(), getString(R.string.session_summary))), tabContainer);
-		tabContainer = new TabSessionComments(getActivity(), mViewPager);
-		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_COMMENTS).setIndicator(UIUtils.createTabView(getActivity(), getString(R.string.session_comments))), tabContainer);
+//		tabContainer = new TabSessionComments(getActivity(), mViewPager);
+//		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_COMMENTS).setIndicator(UIUtils.createTabView(getActivity(), getString(R.string.session_comments))), tabContainer);
 		// tabContainer = new TabSessionInParallel(getActivity(), mViewPager);
 		// mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_IN_PARALLEL).setIndicator(getString(R.string.session_in_parallel)), tabContainer);
 		// tabContainer = new TabSessionActivities(getActivity(), mViewPager);
@@ -170,17 +169,17 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 				Uri sessionUri = MixItContract.Sessions.buildSessionUri(String.valueOf(mSessionId));
 				return new CursorLoader(getActivity(), sessionUri, SessionQuery.PROJECTION, null, null, null);
 			}
-		} else if (id == CURSOR_COMMENTS) {
-			final Intent i = UIUtils.fragmentArgumentsToIntent(args);
-			mSessionId = fetchIdSession(i.getData(), args);
-			if (mSessionId == -1) {
-				Log.e(TAG, "this case should have been detected before in reload() method");
-				displayComments(null);
-				return null;
-			} else {
-				Uri commentsUri = MixItContract.Sessions.buildCommentsDirUri(String.valueOf(mSessionId));
-				return new CursorLoader(getActivity(), commentsUri, CommentsAdapter.CommentsQuery.PROJECTION, null, null, null);
-			}
+//		} else if (id == CURSOR_COMMENTS) {
+//			final Intent i = UIUtils.fragmentArgumentsToIntent(args);
+//			mSessionId = fetchIdSession(i.getData(), args);
+//			if (mSessionId == -1) {
+//				Log.e(TAG, "this case should have been detected before in reload() method");
+//				displayComments(null);
+//				return null;
+//			} else {
+//				Uri commentsUri = MixItContract.Sessions.buildCommentsDirUri(String.valueOf(mSessionId));
+//				return new CursorLoader(getActivity(), commentsUri, CommentsAdapter.CommentsQuery.PROJECTION, null, null, null);
+//			}
 		} else if (id == CURSOR_SPEAKERS) {
 			final Intent i = UIUtils.fragmentArgumentsToIntent(args);
 			mSessionId = fetchIdSession(i.getData(), args);
@@ -217,8 +216,8 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 			if (mIsFirstLoad) {
 				refreshSessionData();
 			}
-		} else if (id == CURSOR_COMMENTS) {
-			displayComments(data);
+//		} else if (id == CURSOR_COMMENTS) {
+//			displayComments(data);
 		} else if (id == CURSOR_SPEAKERS) {
 			displaySpeakers(data);
 		} else if (id == CURSOR_INTERESTS) {
@@ -231,8 +230,8 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 		int id = loader.getId();
 		if (id == CURSOR_SESSION) {
 			displaySession(null);
-		} else if (id == CURSOR_COMMENTS) {
-			displayComments(null);
+//		} else if (id == CURSOR_COMMENTS) {
+//			displayComments(null);
 		} else if (id == CURSOR_SPEAKERS) {
 			displaySpeakers(null);
 		} else if (id == CURSOR_INTERESTS) {
@@ -257,6 +256,10 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 
 		MenuItem actionItem = menu.findItem(R.id.menu_item_vote_favorite);
 		if (!mIsSession) {
+			if (MixItApplication.FORCE_OFFLINE) {
+				actionItem.setVisible(false);
+				actionItem.setEnabled(false);
+			}
 			if (mIsVoted) {
 				actionItem.setTitle(R.string.action_bar_vote_delete);
 				actionItem.setIcon(R.drawable.ic_vote_down);
@@ -322,16 +325,19 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 	void reload() {
 		Bundle args = getArguments();
 		final Intent i = UIUtils.fragmentArgumentsToIntent(args);
-		if (fetchIdSession(i.getData(), args) == -1) {
-			clear();
-			return;
+		Uri sessionUri = i.getData();
+		if (sessionUri == null) {
+			if (!args.containsKey(EXTRA_SESSION_ID) || args.getInt(EXTRA_SESSION_ID) == -1) {
+				clear();
+				return;
+			}
 		}
 		if (getActivity() == null || isDetached()) {
 			return;
 		}
 		LoaderManager lm = getLoaderManager();
 		lm.restartLoader(CURSOR_SESSION, args, this);
-		lm.restartLoader(CURSOR_COMMENTS, args, this);
+//		lm.restartLoader(CURSOR_COMMENTS, args, this);
 		lm.restartLoader(CURSOR_SPEAKERS, args, this);
 		lm.restartLoader(CURSOR_INTERESTS, args, this);
 	}
@@ -339,8 +345,8 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 	void clear() {
 		displayNoSessionSelected();
 		displaySession(null);
-		displaySpeakers(null);
-		displayComments(null);
+//		displaySpeakers(null); // TODO changing the cursor of the list with a header crashes application when refresh ui of the listview...
+//		displayComments(null);
 		displayInterests(null);
 	}
 
@@ -398,18 +404,18 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 		}
 	}
 
-	void displayComments(Cursor c) {
-		try {
-			TabSessionComments tabContainer = (TabSessionComments) mTabsAdapter.getTabContainer(TAB_COMMENTS);
-			if (tabContainer != null) {
-				tabContainer.setCursor(c);
-			} else {
-				Log.e(TAG, "The TabContainer requested with tag TAB_COMMENTS does not exist");
-			}
-		} catch (ClassCastException e) {
-			Log.e(TAG, "The TabContainer requested with tag TAB_COMMENTS is not a TabSessionComments object", e);
-		}
-	}
+//	void displayComments(Cursor c) {
+//		try {
+//			TabSessionComments tabContainer = (TabSessionComments) mTabsAdapter.getTabContainer(TAB_COMMENTS);
+//			if (tabContainer != null) {
+//				tabContainer.setCursor(c);
+//			} else {
+//				Log.e(TAG, "The TabContainer requested with tag TAB_COMMENTS does not exist");
+//			}
+//		} catch (ClassCastException e) {
+//			Log.e(TAG, "The TabContainer requested with tag TAB_COMMENTS is not a TabSessionComments object", e);
+//		}
+//	}
 
 	void displayInterests(Cursor c) {
 		try {
@@ -425,6 +431,9 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 	}
 	
 	public void refreshSessionData() {
+		if (MixItApplication.FORCE_OFFLINE) {
+			return;
+		}
 		if (isBound && serviceReady) {
             setRefreshMode(true);
             
@@ -488,6 +497,9 @@ public class SessionDetailsFragment extends BoundServiceFragment implements Load
 	}
 
 	void voteForLightning(boolean addVote) {
+		if (MixItApplication.FORCE_OFFLINE) {
+			return;
+		}
 		if (isBound && serviceReady) {
             setRefreshMode(true);
             

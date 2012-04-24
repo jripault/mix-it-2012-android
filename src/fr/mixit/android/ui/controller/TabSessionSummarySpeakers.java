@@ -45,7 +45,7 @@ public class TabSessionSummarySpeakers extends TabContainer implements OnItemCli
 		mListView = (ListView) mContainerLayout.findViewById(android.R.id.list);
 
 		mHeaderSummaryView = inflater.inflate(R.layout.header_sessions_summary, mListView, false);
-		mListView.addHeaderView(mHeaderSummaryView, null, false);
+		mListView.addHeaderView(mHeaderSummaryView, "Summary", false);
 		mListView.setOnItemClickListener(this);
 	}
 

@@ -157,7 +157,7 @@ public class SessionsHandler extends JsonHandler {
 				if (session.has(TAG_NB_VOTES))
 					builder.withValue(MixItContract.Sessions.NB_VOTES, session.getInt(TAG_NB_VOTES));
 				if (session.has(TAG_MY_VOTE))
-					builder.withValue(MixItContract.Sessions.MY_VOTE, session.getInt(TAG_MY_VOTE));
+					builder.withValue(MixItContract.Sessions.MY_VOTE, session.getBoolean(TAG_MY_VOTE) ? 1 : 0);
 				if (session.has(TAG_IS_FAVORITE))
 					builder.withValue(MixItContract.Sessions.IS_FAVORITE, session.getInt(TAG_IS_FAVORITE));
 				build = true;
@@ -243,8 +243,8 @@ public class SessionsHandler extends JsonHandler {
 //			final String newTime = session.has(TAG_TIME) ? session.getString(TAG_TIME).toLowerCase().trim() : curTime;
 			final String newTrackId = session.has(TAG_TRACK) ? session.getString(TAG_TRACK).toLowerCase().trim() : curTrackId;
 			final int newNbVotes = session.has(TAG_NB_VOTES) ? session.getInt(TAG_NB_VOTES) : curNbVotes;
-			final int newMyVote = session.has(TAG_MY_VOTE) ? session.getInt(TAG_MY_VOTE) : curMyVote;
-			final int newIsFavorite = session.has(TAG_IS_FAVORITE) ? session.getInt(TAG_MY_VOTE) : curIsFavorite;
+			final int newMyVote = session.has(TAG_MY_VOTE) ? session.getBoolean(TAG_MY_VOTE) ? 1 : 0 : curMyVote;
+			final int newIsFavorite = session.has(TAG_IS_FAVORITE) ? session.getInt(TAG_IS_FAVORITE) : curIsFavorite;
 
 			return (!curTitle.equals(newTitle) || !curSummary.equals(newSummary) || !curDesc.equals(newDesc)// || !curTime.equals(newTime)
 					|| !curTrackId.equals(newTrackId) || curNbVotes != newNbVotes || curMyVote != newMyVote || curIsFavorite != newIsFavorite);

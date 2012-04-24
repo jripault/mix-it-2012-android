@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import fr.mixit.android.MixItApplication;
 import fr.mixit.android.R;
 import fr.mixit.android.provider.MixItContract;
 import fr.mixit.android.services.MixItService;
@@ -161,6 +162,9 @@ public class MembersListFragment extends BoundServiceListFragment implements Loa
 	}
 	
 	void refreshMembersData() {
+		if (MixItApplication.FORCE_OFFLINE) {
+			return;
+		}
 		if (isBound && serviceReady) {
             setRefreshMode(true);
 

@@ -46,6 +46,7 @@ public class MembersActivity extends GenericMixItActivity implements OnNavigatio
 
 		super.onCreate(savedStateInstance);
 
+        setRefreshMode(false);
 		Context context = getSupportActionBar().getThemedContext();
 		ArrayAdapter<CharSequence> listAdapter = ArrayAdapter.createFromResource(context, R.array.members, R.layout.sherlock_spinner_item);
 		listAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);

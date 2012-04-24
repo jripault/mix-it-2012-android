@@ -49,6 +49,7 @@ public class SessionsActivity extends GenericMixItActivity implements OnNavigati
         
 		super.onCreate(savedStateInstance);
 
+        setRefreshMode(false);
 		mode = getIntent().getBooleanExtra(EXTRA_STARRED_MODE, false) ? DISPLAY_MODE_SESSIONS_STARRED : DISPLAY_MODE_SESSIONS;
 
 		if (!(mode == DISPLAY_MODE_SESSIONS_STARRED)) {

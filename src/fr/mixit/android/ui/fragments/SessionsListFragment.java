@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ToggleButton;
+import fr.mixit.android.MixItApplication;
 import fr.mixit.android.R;
 import fr.mixit.android.model.Track;
 import fr.mixit.android.provider.MixItContract;
@@ -82,8 +83,6 @@ public class SessionsListFragment extends BoundServiceListFragment implements Lo
 		}
 
 		return root;
-		// View v = super.onCreateView(inflater, container, savedInstanceState);
-		// return v;
 	}
 
 	@Override
@@ -126,7 +125,7 @@ public class SessionsListFragment extends BoundServiceListFragment implements Lo
 			final Intent i = UIUtils.fragmentArgumentsToIntent(args);
 			Uri sessionsUri = i.getData();
 			if (sessionsUri == null) {
-				sessionsUri = MixItContract.Sessions.CONTENT_URI;
+//				sessionsUri = MixItContract.Sessions.CONTENT_URI;
 				sessionsUri = mode == SessionsActivity.DISPLAY_MODE_LIGHTNING_TALKS ? MixItContract.Sessions.CONTENT_URI_LIGNTHNING : MixItContract.Sessions.CONTENT_URI;
 			}
 
@@ -244,11 +243,14 @@ public class SessionsListFragment extends BoundServiceListFragment implements Lo
 			return;
 		}
 		LoaderManager lm = getLoaderManager();
-		lm.destroyLoader(CURSOR_SESSIONS);
+//		lm.destroyLoader(CURSOR_SESSIONS);
 		lm.restartLoader(CURSOR_SESSIONS, getArguments(), this);
 	}
 	
 	void refreshSessionsData() {
+		if (MixItApplication.FORCE_OFFLINE) {
+			return;
+		}
 		if (isBound && serviceReady) {
 			Message msg = null;
 			if (mode == SessionsActivity.DISPLAY_MODE_SESSIONS) {

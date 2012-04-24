@@ -24,6 +24,7 @@ public class LoginAndroidAccountsListActivity extends GenericMixItActivity imple
 
 		super.onCreate(bundle);
 
+        setRefreshMode(false);
 		FragmentManager fm = getSupportFragmentManager();
 		mLoginFrag = (LoginAndroidAccountsListFragment) fm.findFragmentByTag(LoginAndroidAccountsListFragment.TAG);
 		if (mLoginFrag == null) {

@@ -67,10 +67,9 @@
         <item name="android:maxWidth">180dip</item>
     </style>
     <style name="ItemTitle">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textStyle">bold</item><item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:textColor">@color/body_text_1</item>
-    </style>
+</style>
     <style name="ItemSubTitle">
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textColor">@color/body_text_2</item>

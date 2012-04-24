@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.SherlockDialogFragment;
 
 import fr.mixit.android.R;
 import fr.mixit.android.utils.UIUtils;
 
-public class AboutFragment extends SherlockFragment {
+public class AboutFragment extends SherlockDialogFragment {
 
 	public static final String TAG = AboutFragment.class.getSimpleName();
 
@@ -20,6 +20,13 @@ public class AboutFragment extends SherlockFragment {
 		AboutFragment f = new AboutFragment();
 		f.setArguments(UIUtils.intentToFragmentArguments(intent));
 		return f;
+	}
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+//		setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Dialog);
 	}
 	
 	@Override

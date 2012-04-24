@@ -38,7 +38,7 @@ public class MembersHandler extends JsonHandler {
 	static final String TAG_SHORT_DESC = "shortdesc";
 	static final String TAG_LONG_DESCRIPTION = "longDescription";
 	static final String TAG_LONG_DESC = "longdesc";
-	static final String TAG_NB_CONSULT = "nbConsults";
+	static final String TAG_NB_CONSULT = "nbConsult";
 	static final String TAG_IMAGE_URL = "urlImage";
 
 	static final String TAG_LINKS = "links";
@@ -54,7 +54,7 @@ public class MembersHandler extends JsonHandler {
 	static final String TAG_SHARED_LINKS = "sharedLinks";
 	static final String TAG_ORDER_NUM = "ordernum";
 	static final String TAG_NAME = "name";
-	static final String TAG_URL = "URL";
+	static final String TAG_URL = "url";
 
 	static final String TAG_ACCOUNTS = "accounts";
 	static final String TAG_GOOGLE = "Google";
@@ -329,8 +329,8 @@ public class MembersHandler extends JsonHandler {
 		final HashSet<String> interestsIds = Sets.newHashSet();
     	
     	for (int j = 0; j < interests.length(); j++) {
-    		JSONObject interest = interests.getJSONObject(j);
-		    final String interestId = interest.getString(TAG_ID);
+//    		JSONObject interest = interests.getJSONObject(j);
+		    final String interestId = interests.getString(j);//TAG_ID
         	interestsIds.add(interestId);
 
 	    	batch.add(ContentProviderOperation.newInsert(memberInterestsUri)
@@ -419,8 +419,8 @@ public class MembersHandler extends JsonHandler {
 		final HashSet<String> linksIds = Sets.newHashSet();
     	
     	for (int j = 0; j < links.length(); j++) {
-    		JSONObject link = links.getJSONObject(j);
-		    final String linkId = link.getString(TAG_ID);
+//    		JSONObject link = links.getJSONObject(j);
+		    final String linkId = links.getString(j);//TAG_ID
         	linksIds.add(linkId);
 
 	    	batch.add(ContentProviderOperation.newInsert(memberLinksUri)
@@ -440,8 +440,8 @@ public class MembersHandler extends JsonHandler {
 		final HashSet<String> linkersIds = Sets.newHashSet();
     	
     	for (int j = 0; j < linkers.length(); j++) {
-    		JSONObject linker = linkers.getJSONObject(j);
-		    final String linkerId = linker.getString(TAG_ID);
+//    		JSONObject linker = linkers.getJSONObject(j);
+		    final String linkerId = linkers.getString(j);//TAG_ID
 		    linkersIds.add(linkerId);
 
 	    	batch.add(ContentProviderOperation.newInsert(memberLinkersUri)

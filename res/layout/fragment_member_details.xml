@@ -39,6 +39,7 @@
                 android:gravity="center" />
             <TextView
                 android:id="@+id/member_name"
+                style="@style/ItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -49,14 +50,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/member_name"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/member_name" />
+                android:layout_below="@id/member_name"
+                android:textColor="@color/body_text_1"
+                android:textSize="@dimen/text_size_small" />
             <TextView
                 android:id="@+id/member_short_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/member_name"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/member_company" />
+                android:layout_below="@id/member_company"
+                android:textColor="@color/body_text_1"
+                android:textSize="@dimen/text_size_small" />
         </RelativeLayout>
         <LinearLayout
             android:id="@+id/member_shared_links"
