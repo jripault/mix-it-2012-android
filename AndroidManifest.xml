@@ -38,7 +38,7 @@
         </activity>
         <activity
             android:name=".ui.HomeActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="" >
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -47,7 +47,7 @@
         </activity>
         <activity
             android:name=".ui.StreamActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="@string/btn_stream" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -56,7 +56,7 @@
         </activity>
         <activity
             android:name=".ui.ScheduleActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="@string/btn_schedule" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -65,7 +65,7 @@
         </activity>
         <activity
             android:name=".ui.SessionsActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -75,7 +75,7 @@
         </activity>
         <activity
             android:name=".ui.SessionDetailsActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -85,7 +85,7 @@
         </activity>
         <activity
             android:name=".ui.MembersActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -95,7 +95,7 @@
         </activity>
         <activity
             android:name=".ui.MemberDetailsActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -105,7 +105,7 @@
         </activity>
         <activity
             android:name=".ui.StarredActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="@string/btn_starred" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -114,7 +114,7 @@
         </activity>
         <activity
             android:name=".ui.InterestsActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -124,7 +124,7 @@
         </activity>
         <activity
             android:name=".ui.MapActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -133,7 +133,7 @@
         </activity>
         <activity
             android:name=".ui.AccountActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="@string/action_bar_account" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -142,7 +142,7 @@
         </activity>
         <activity
             android:name=".ui.LoginMixItActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="@string/login" >
             <intent-filter>
                 <action android:name="fr.mixit.android.ACTION_LOGIN_MIXIT" />
@@ -151,7 +151,7 @@
         </activity>
         <activity
             android:name=".ui.LoginAndroidAccountsListActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="@string/login" >
             <intent-filter>
                 <action android:name="fr.mixit.android.ACTION_LOGIN_ANDROID_ACCOUNTS" />
@@ -160,7 +160,7 @@
         </activity>
         <activity
             android:name=".ui.LoginOAuthActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="@string/login" >
             <intent-filter>
                 <action android:name="fr.mixit.android.ACTION_LOGIN_OAUTH" />
@@ -169,7 +169,7 @@
         </activity>
         <activity
             android:name=".ui.AboutActivity"
-            android:icon="@drawable/logo_mixit_transparent"
+            android:icon="@drawable/ic_action_bar"
             android:label="@string/action_bar_about" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
