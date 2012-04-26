@@ -60,5 +60,5 @@
             android:textOff="@string/track_weby"
             android:textOn="@string/track_weby" />
     </LinearLayout>
-    <include layout="@android:layout/list_content" />
+    <include layout="@layout/list_content" />
 </LinearLayout>
