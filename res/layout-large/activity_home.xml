@@ -7,17 +7,17 @@
         android:id="@+id/fragment_whats_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        class="fr.mixit.android.ui.fragments.WhatsNextFragment" />
+        class="fr.mixit.android_2012.ui.fragments.WhatsNextFragment" />
     <fragment
         android:id="@+id/fragment_stream"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        class="fr.mixit.android.ui.fragments.StreamFragment" />
+        class="fr.mixit.android_2012.ui.fragments.StreamFragment" />
     <fragment
         android:id="@+id/fragment_dashboard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        class="fr.mixit.android.ui.fragments.DashboardFragment" />
+        class="fr.mixit.android_2012.ui.fragments.DashboardFragment" />
 </LinearLayout>

@@ -8,7 +8,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        class="fr.mixit.android.ui.fragments.DashboardFragment" />
+        class="fr.mixit.android_2012.ui.fragments.DashboardFragment" />
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -18,13 +18,13 @@
             android:id="@+id/fragment_stream"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            class="fr.mixit.android.ui.fragments.StreamFragment" />
+            class="fr.mixit.android_2012.ui.fragments.StreamFragment" />
         <fragment
             android:id="@+id/fragment_whats_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_below="@id/fragment_stream"
-            class="fr.mixit.android.ui.fragments.WhatsNextFragment" />
+            class="fr.mixit.android_2012.ui.fragments.WhatsNextFragment" />
     </RelativeLayout>
 </LinearLayout>

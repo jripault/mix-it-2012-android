@@ -1,4 +1,4 @@
-<fr.mixit.android.ui.widgets.DashboardLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<fr.mixit.android_2012.ui.widgets.DashboardLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     <Button
@@ -43,4 +43,4 @@
         android:layout_height="wrap_content"
         android:drawableTop="@drawable/home_btn_map"
         android:text="@string/btn_map" />
-</fr.mixit.android.ui.widgets.DashboardLayout>
+</fr.mixit.android_2012.ui.widgets.DashboardLayout>

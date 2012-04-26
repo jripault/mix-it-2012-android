@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Generic -->
-    <string name="app_name">Mix-IT</string>
     <string name="permission_write">Modifier les données de Mix-IT</string>
     <string name="functionnality_need_connectivity">Cette fonctionnalité nécessite une connectivité</string>
     <!-- Errors -->
@@ -37,8 +36,8 @@
     <string name="no_session_summary">Pas de description pour cette Sessions</string>
     <string name="no_session_speakers">Pas de speaker pour cette Session</string>
     <string name="action_bar_share_with">Partager avec...</string>
-    <string name="share_session_subject">Découvrez cette sessions à Mix-IT</string>
-    <string name="share_session_text">Découvrez cette sessions \"%1$s\" à Mix-IT : %1$s</string>
+    <string name="share_session_subject">Découvrez cette session à Mix-IT</string>
+    <string name="share_session_text">Découvrez la session \"%1$s\" à Mix-IT : %2$s</string>
     <string name="action_bar_vote_add">+1</string>
     <string name="action_bar_vote_delete">-1</string>
     <string name="action_bar_favorite_add">Ajouter aux favoris</string>

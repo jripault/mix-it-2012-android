@@ -8,5 +8,5 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        class="fr.mixit.android.ui.fragments.ScheduleFragment" />
+        class="fr.mixit.android_2012.ui.fragments.ScheduleFragment" />
 </LinearLayout>

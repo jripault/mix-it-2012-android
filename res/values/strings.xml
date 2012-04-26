@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Generic -->
-    <string name="app_name">Mix-IT 2012 NEW</string>
+    <string name="app_name">Mix-IT 2012</string>
     <string name="permission_write">Modify MixIt schedule data</string>
     <string name="functionnality_need_connectivity">This functionnality need a connection</string>
     <!-- Errors -->
@@ -38,7 +38,7 @@
     <string name="no_session_speakers">No Speaker for this Session</string>
     <string name="action_bar_share_with">Share with...</string>
     <string name="share_session_subject">Discover this talk at Mix-IT</string>
-    <string name="share_session_text">Discover the talk \"%1$s\" at Mix-IT : %1$s</string>
+    <string name="share_session_text">Discover the talk \"%1$s\" at Mix-IT : %2$s</string>
     <string name="action_bar_vote_add">+1</string>
     <string name="action_bar_vote_delete">-1</string>
     <string name="action_bar_favorite_add">Add to favorite</string>
